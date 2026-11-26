@@ -1,0 +1,12 @@
+test_empty_answer_keeps_usage_for_settlement (test_groq.GroqAdapterTests.test_empty_answer_keeps_usage_for_settlement) ... ok
+test_groq_prices_and_conservative_bound (test_groq.GroqAdapterTests.test_groq_prices_and_conservative_bound) ... ok
+test_invalid_usage_rejected (test_groq.GroqAdapterTests.test_invalid_usage_rejected) ... ok
+test_missing_key_never_calls_provider (test_groq.GroqAdapterTests.test_missing_key_never_calls_provider) ... ok
+test_uncertain_failures_keep_reservation (test_groq.GroqAdapterTests.test_uncertain_failures_keep_reservation) ... ok
+test_upstream_rejection_refundable_and_safe (test_groq.GroqAdapterTests.test_upstream_rejection_refundable_and_safe) ... ok
+test_usage_and_request_parameters (test_groq.GroqAdapterTests.test_usage_and_request_parameters) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.017s
+
+OK

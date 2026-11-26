@@ -1,0 +1,147 @@
+$ docker ps -a -q --filter label=com.docker.compose.project=k5-day14-cp5-compose
+
+
+[exit code 0]
+$ docker compose -p k5-day14-cp5-compose up -d --build --wait --wait-timeout 120
+#1 [internal] load local bake definitions
+#1 reading from stdin 750B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.04kB 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.11-slim
+#3 DONE 1.4s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 263B 0.0s done
+#4 DONE 0.0s
+
+#5 [builder 1/5] FROM docker.io/library/python:3.11-slim@sha256:61e01f72680f86a5279ad510818ab7b2ee9f049822589d4e34e33e044360356c
+#5 resolve docker.io/library/python:3.11-slim@sha256:61e01f72680f86a5279ad510818ab7b2ee9f049822589d4e34e33e044360356c 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 407B 0.1s done
+#6 DONE 0.1s
+
+#7 [runtime 3/6] WORKDIR /app
+#7 CACHED
+
+#8 [builder 2/5] WORKDIR /build
+#8 CACHED
+
+#9 [builder 3/5] RUN python -m venv /opt/venv
+#9 CACHED
+
+#10 [builder 4/5] COPY requirements.txt .
+#10 CACHED
+
+#11 [runtime 2/6] RUN groupadd --gid 10001 agent     && useradd --uid 10001 --gid agent --create-home --shell /usr/sbin/nologin agent
+#11 CACHED
+
+#12 [runtime 5/6] COPY --chown=agent:agent app/ app/
+#12 CACHED
+
+#13 [builder 5/5] RUN pip install --no-cache-dir --disable-pip-version-check -r requirements.txt
+#13 CACHED
+
+#14 [runtime 4/6] COPY --from=builder /opt/venv /opt/venv
+#14 CACHED
+
+#15 [runtime 6/6] COPY --chown=agent:agent utils/ utils/
+#15 CACHED
+
+#16 exporting to image
+#16 exporting layers done
+#16 exporting manifest sha256:2205604a1ea6a8484faffc44545908159ce142239380ea2c73f22526434d4287 0.0s done
+#16 exporting config sha256:20e998cf356ccc45a30fa1e1486ddefd72b0701be947230950b25c9a292bc6dc 0.0s done
+#16 exporting attestation manifest sha256:93338d1fbc2ca56f6e47e104536e4bfb9bc1c421016c4aaf4ce1116a7fa5511c 0.0s done
+#16 exporting manifest list sha256:90a7ec3f125a71eef269ce3d526aad95c49c29aed5f2359cf94b75333086f668 0.0s done
+#16 naming to docker.io/library/k5-day14-cp5-compose-agent:latest
+#16 naming to docker.io/library/k5-day14-cp5-compose-agent:latest done
+#16 unpacking to docker.io/library/k5-day14-cp5-compose-agent:latest
+#16 unpacking to docker.io/library/k5-day14-cp5-compose-agent:latest 1.1s done
+#16 DONE 1.3s
+
+#17 resolving provenance for metadata file
+#17 DONE 0.0s
+
+ Image k5-day14-cp5-compose-agent Building 
+ Image k5-day14-cp5-compose-agent Built 
+ Network k5-day14-cp5-compose_default Creating 
+ Volume k5-day14-cp5-compose_redis_data Creating 
+ Volume k5-day14-cp5-compose_redis_data Creating 
+ Network k5-day14-cp5-compose_default Creating 
+ Volume k5-day14-cp5-compose_redis_data Created 
+ Volume k5-day14-cp5-compose_redis_data Created 
+ Network k5-day14-cp5-compose_default Created 
+ Network k5-day14-cp5-compose_default Created 
+ Container k5-day14-cp5-compose-redis-1 Creating 
+ Container k5-day14-cp5-compose-redis-1 Created 
+ Container k5-day14-cp5-compose-agent-1 Creating 
+ Container k5-day14-cp5-compose-agent-1 Created 
+ Container k5-day14-cp5-compose-redis-1 Starting 
+ Container k5-day14-cp5-compose-redis-1 Started 
+ Container k5-day14-cp5-compose-redis-1 Waiting 
+ Container k5-day14-cp5-compose-redis-1 Healthy 
+ Container k5-day14-cp5-compose-agent-1 Starting 
+ Container k5-day14-cp5-compose-agent-1 Started 
+ Container k5-day14-cp5-compose-agent-1 Waiting 
+ Container k5-day14-cp5-compose-redis-1 Waiting 
+ Container k5-day14-cp5-compose-redis-1 Healthy 
+ Container k5-day14-cp5-compose-agent-1 Healthy 
+
+[exit code 0]
+$ docker compose -p k5-day14-cp5-compose ps -a
+NAME                           IMAGE                        COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+k5-day14-cp5-compose-agent-1   k5-day14-cp5-compose-agent   "sh -c 'exec uvicorn…"   agent     12 seconds ago   Up 5 seconds (healthy)    127.0.0.1:50721->50721/tcp
+k5-day14-cp5-compose-redis-1   redis:7-alpine               "docker-entrypoint.s…"   redis     12 seconds ago   Up 11 seconds (healthy)   6379/tcp
+
+
+[exit code 0]
+$ docker compose -p k5-day14-cp5-compose logs --no-color --tail 80
+redis-1  | 1:C 26 Nov 2026 08:47:32.013 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1  | 1:C 26 Nov 2026 08:47:32.013 * Redis version=7.4.12, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1  | 1:C 26 Nov 2026 08:47:32.013 * Configuration loaded
+redis-1  | 1:M 26 Nov 2026 08:47:32.014 * monotonic clock: POSIX clock_gettime
+redis-1  | 1:M 26 Nov 2026 08:47:32.019 * Running mode=standalone, port=6379.
+redis-1  | 1:M 26 Nov 2026 08:47:32.020 * Server initialized
+redis-1  | 1:M 26 Nov 2026 08:47:32.024 * Creating AOF base file appendonly.aof.1.base.rdb on server start
+redis-1  | 1:M 26 Nov 2026 08:47:32.030 * Creating AOF incr file appendonly.aof.1.incr.aof on server start
+redis-1  | 1:M 26 Nov 2026 08:47:32.030 * Ready to accept connections tcp
+agent-1  | INFO:     Uvicorn running on http://0.0.0.0:50721 (Press CTRL+C to quit)
+agent-1  | INFO:     Started parent process [1]
+agent-1  | INFO:     Started server process [8]
+agent-1  | INFO:     Waiting for application startup.
+agent-1  | {"ts": "2026-11-26T08:47:39.466170+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+agent-1  | INFO:     Application startup complete.
+agent-1  | INFO:     Started server process [9]
+agent-1  | INFO:     Waiting for application startup.
+agent-1  | {"ts": "2026-11-26T08:47:39.470311+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+agent-1  | INFO:     Application startup complete.
+agent-1  | {"ts": "2026-11-26T08:47:42.856644+00:00", "level": "INFO", "event": "http_request", "request_id": "ac5365996b134592af17fb3024f686b2", "method": "GET", "path": "/health", "status": 200, "ms": 1.18}
+agent-1  | {"ts": "2026-11-26T08:47:43.336376+00:00", "level": "INFO", "event": "http_request", "request_id": "b941bb41288542b58f5f700dc60bdec5", "method": "GET", "path": "/health", "status": 200, "ms": 1.021}
+
+
+[exit code 0]
+$ docker compose -p k5-day14-cp5-compose down --volumes
+
+ Container k5-day14-cp5-compose-agent-1 Stopping 
+ Container k5-day14-cp5-compose-agent-1 Stopped 
+ Container k5-day14-cp5-compose-agent-1 Removing 
+ Container k5-day14-cp5-compose-agent-1 Removed 
+ Container k5-day14-cp5-compose-redis-1 Stopping 
+ Container k5-day14-cp5-compose-redis-1 Stopped 
+ Container k5-day14-cp5-compose-redis-1 Removing 
+ Container k5-day14-cp5-compose-redis-1 Removed 
+ Volume k5-day14-cp5-compose_redis_data Removing 
+ Network k5-day14-cp5-compose_default Removing 
+ Volume k5-day14-cp5-compose_redis_data Removed 
+ Network k5-day14-cp5-compose_default Removed 
+
+[exit code 0]

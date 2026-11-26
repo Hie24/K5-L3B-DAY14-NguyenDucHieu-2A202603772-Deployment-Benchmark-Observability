@@ -1,0 +1,990 @@
+Stage cp4; actual commands and outputs; secrets redacted.
+
+$ cd 05-scaling-reliability/develop; python app.py  # cp4-health
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' http://127.0.0.1:8000/health
+HTTP/1.1 200 OK
+date: Thu, 26 Nov 2026 08:26:08 GMT
+server: uvicorn
+content-length: 185
+content-type: application/json
+
+{"status":"ok","uptime_seconds":1.0,"version":"1.0.0","environment":"development","timestamp":"2026-11-26T08:26:08.831252+00:00","checks":{"memory":{"status":"ok","used_percent":14.3}}}
+CP_STATUS:200
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' http://127.0.0.1:8000/ready
+HTTP/1.1 200 OK
+date: Thu, 26 Nov 2026 08:26:08 GMT
+server: uvicorn
+content-length: 37
+content-type: application/json
+
+{"ready":true,"in_flight_requests":1}
+CP_STATUS:200
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' -X POST -H 'Content-Type: application/json' --data '{}' 'http://127.0.0.1:8000/ask?question=Long%20task'
+$ kill -TERM <owned-agent-pid>  # while POST /ask is in progress
+HTTP/1.1 200 OK
+date: Thu, 26 Nov 2026 08:26:08 GMT
+server: uvicorn
+content-length: 103
+content-type: application/json
+
+{"answer":"Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã được nhận."}
+CP_STATUS:200
+[exit code 0]
+
+Graceful shutdown: in-flight HTTP 200, exit 0, 3.222s
+Server cp4-health: exit code 0
+$ docker compose -p k5-day14-scaling ps -a -q
+
+[exit code 0]
+
+$ docker compose -p k5-day14-scaling up -d --build --wait --wait-timeout 180 --scale agent=3
+time="2026-11-26T08:26:12Z" level=warning msg="/mnt/c/Users/nguye/Downloads/AITC_K5/DAY14/LAB14/K5-L3B-DAY14-NguyenDucHieu-2A202603772-Deployment-Benchmark-Observability/05-scaling-reliability/production/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+ Image k5-day14-scaling-agent Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 778B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.23kB 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.11-slim
+#3 DONE 1.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B 0.0s done
+#4 DONE 0.0s
+
+#5 [builder 1/5] FROM docker.io/library/python:3.11-slim@sha256:61e01f72680f86a5279ad510818ab7b2ee9f049822589d4e34e33e044360356c
+#5 resolve docker.io/library/python:3.11-slim@sha256:61e01f72680f86a5279ad510818ab7b2ee9f049822589d4e34e33e044360356c 0.0s done
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 125B 0.0s done
+#6 DONE 0.0s
+
+#7 [builder 4/5] COPY requirements.txt .
+#7 CACHED
+
+#8 [runtime 4/7] COPY --from=builder /root/.local /home/agent/.local
+#8 CACHED
+
+#9 [runtime 6/7] COPY utils/ ./utils/
+#9 CACHED
+
+#10 [runtime 2/7] RUN groupadd -r agent && useradd -r -g agent -d /app agent
+#10 CACHED
+
+#11 [runtime 3/7] WORKDIR /app
+#11 CACHED
+
+#12 [builder 3/5] RUN apt-get update && apt-get install -y gcc libpq-dev     && rm -rf /var/lib/apt/lists/*
+#12 CACHED
+
+#13 [builder 2/5] WORKDIR /app
+#13 CACHED
+
+#14 [builder 5/5] RUN pip install --no-cache-dir --user -r requirements.txt
+#14 CACHED
+
+#15 [runtime 5/7] COPY app.py .
+#15 CACHED
+
+#16 [runtime 7/7] RUN chown -R agent:agent /app
+#16 CACHED
+
+#17 exporting to image
+#17 exporting layers done
+#17 exporting manifest sha256:db6df53bc652b53dd4b856968a0deb241e387cd1713ffee4e271438cab1f1520 done
+#17 exporting config sha256:9708fc2b7984f3285aac54c2d1da4a68a8046f484e69871f602b4cbd7c275880 done
+#17 exporting attestation manifest sha256:8d3828dbe2a8972bf2dc4229b759bd281aac74f2579036c5df9ca8c1dcddcd53 0.0s done
+#17 exporting manifest list sha256:ce8c3f4041ce0b5d2f537a346bb4c5d55e0659f4c7cab210312f180c692955b2 0.0s done
+#17 naming to docker.io/library/k5-day14-scaling-agent:latest done
+#17 unpacking to docker.io/library/k5-day14-scaling-agent:latest done
+#17 DONE 0.1s
+
+#18 resolving provenance for metadata file
+#18 DONE 0.0s
+ Image k5-day14-scaling-agent Built 
+ Network k5-day14-scaling_agent_net Creating 
+ Network k5-day14-scaling_agent_net Creating 
+ Network k5-day14-scaling_agent_net Created 
+ Network k5-day14-scaling_agent_net Created 
+ Container k5-day14-scaling-redis-1 Creating 
+ Container k5-day14-scaling-redis-1 Created 
+ Container k5-day14-scaling-agent-3 Creating 
+ Container k5-day14-scaling-agent-1 Creating 
+ Container k5-day14-scaling-agent-2 Creating 
+ Container k5-day14-scaling-agent-2 Created 
+ Container k5-day14-scaling-agent-1 Created 
+ Container k5-day14-scaling-agent-3 Created 
+ Container k5-day14-scaling-nginx-1 Creating 
+ Container k5-day14-scaling-nginx-1 Created 
+ Container k5-day14-scaling-redis-1 Starting 
+ Container k5-day14-scaling-redis-1 Started 
+ Container k5-day14-scaling-redis-1 Waiting 
+ Container k5-day14-scaling-redis-1 Healthy 
+ Container k5-day14-scaling-agent-1 Starting 
+ Container k5-day14-scaling-agent-1 Started 
+ Container k5-day14-scaling-agent-2 Starting 
+ Container k5-day14-scaling-agent-2 Started 
+ Container k5-day14-scaling-agent-3 Starting 
+ Container k5-day14-scaling-agent-3 Started 
+ Container k5-day14-scaling-nginx-1 Starting 
+ Container k5-day14-scaling-nginx-1 Started 
+ Container k5-day14-scaling-nginx-1 Waiting 
+ Container k5-day14-scaling-agent-3 Waiting 
+ Container k5-day14-scaling-agent-1 Waiting 
+ Container k5-day14-scaling-agent-2 Waiting 
+ Container k5-day14-scaling-redis-1 Waiting 
+ Container k5-day14-scaling-redis-1 Healthy 
+ Container k5-day14-scaling-nginx-1 Healthy 
+ Container k5-day14-scaling-agent-3 Healthy 
+ Container k5-day14-scaling-agent-1 Healthy 
+ Container k5-day14-scaling-agent-2 Healthy
+[exit code 0]
+
+$ /mnt/c/Users/nguye/Downloads/AITC_K5/DAY14/LAB14/K5-L3B-DAY14-NguyenDucHieu-2A202603772-Deployment-Benchmark-Observability/.venv/bin/python test_stateless.py
+============================================================
+Stateless Scaling Demo
+============================================================
+
+Session ID: 04c59eb2-2196-4c40-82cf-c38053cd4aa7
+
+Request 1: [instance-e2e8b5]
+  Q: What is Docker?
+  A: Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!...
+
+Request 2: [instance-f78e91]
+  Q: Why do we need containers?
+  A: Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã được nhận....
+
+Request 3: [instance-115be4]
+  Q: What is Kubernetes?
+  A: Đây là câu trả lời từ AI agent (mock). Trong production, đây sẽ là response từ O...
+
+Request 4: [instance-e2e8b5]
+  Q: How does load balancing work?
+  A: Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé....
+
+Request 5: [instance-f78e91]
+  Q: What is Redis used for?
+  A: Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé....
+
+------------------------------------------------------------
+Total requests: 5
+Instances used: {'instance-e2e8b5', 'instance-115be4', 'instance-f78e91'}
+✅ All requests served despite different instances!
+
+--- Conversation History ---
+Total messages: 10
+  [user]: What is Docker?...
+  [assistant]: Container là cách đóng gói app để chạy ở mọi nơi. Build once...
+  [user]: Why do we need containers?...
+  [assistant]: Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã đư...
+  [user]: What is Kubernetes?...
+  [assistant]: Đây là câu trả lời từ AI agent (mock). Trong production, đây...
+  [user]: How does load balancing work?...
+  [assistant]: Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đ...
+  [user]: What is Redis used for?...
+  [assistant]: Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đ...
+
+✅ Session history preserved across all instances via Redis!
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' http://127.0.0.1:8080/chat/04c59eb2-2196-4c40-82cf-c38053cd4aa7/history
+HTTP/1.1 200 OK
+Server: nginx/1.31.10
+Date: Thu, 26 Nov 2026 08:26:33 GMT
+Content-Type: application/json
+Content-Length: 1431
+Connection: keep-alive
+X-Served-By: 172.20.0.3:8000
+
+{"session_id":"04c59eb2-2196-4c40-82cf-c38053cd4aa7","messages":[{"role":"user","content":"What is Docker?","timestamp":"2026-11-26T08:26:33.136929+00:00"},{"role":"assistant","content":"Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!","timestamp":"2026-11-26T08:26:33.280830+00:00"},{"role":"user","content":"Why do we need containers?","timestamp":"2026-11-26T08:26:33.285699+00:00"},{"role":"assistant","content":"Tôi là AI agent được deploy lên cloud. Câu hỏi của bạn đã được nhận.","timestamp":"2026-11-26T08:26:33.428672+00:00"},{"role":"user","content":"What is Kubernetes?","timestamp":"2026-11-26T08:26:33.432293+00:00"},{"role":"assistant","content":"Đây là câu trả lời từ AI agent (mock). Trong production, đây sẽ là response từ OpenAI/Anthropic.","timestamp":"2026-11-26T08:26:33.537396+00:00"},{"role":"user","content":"How does load balancing work?","timestamp":"2026-11-26T08:26:33.540510+00:00"},{"role":"assistant","content":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.","timestamp":"2026-11-26T08:26:33.688089+00:00"},{"role":"user","content":"What is Redis used for?","timestamp":"2026-11-26T08:26:33.691960+00:00"},{"role":"assistant","content":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.","timestamp":"2026-11-26T08:26:33.796916+00:00"}],"count":10}
+CP_STATUS:200
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' -X POST -H 'Content-Type: application/json' --data '{"question": "Before stopping an instance"}' http://127.0.0.1:8080/chat
+HTTP/1.1 200 OK
+Server: nginx/1.31.10
+Date: Thu, 26 Nov 2026 08:26:34 GMT
+Content-Type: application/json
+Content-Length: 245
+Connection: keep-alive
+X-Served-By: 172.20.0.4:8000
+
+{"session_id":"cd653179-a8ea-452d-a2d4-7e4c067230f7","question":"Before stopping an instance","answer":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.","turn":2,"served_by":"instance-f78e91","storage":"redis"}
+CP_STATUS:200
+[exit code 0]
+
+$ docker compose -p k5-day14-scaling ps -q agent
+0a42e10e4260cae3dd017499fc1bde6df38d7a370a4edc0075f09a60301b7805
+491768c007d15e885c0ff7f7fde4836c7b6c42005f4017d76851d958e2a986b4
+c3957069ab6b2b10aa6eccde05f70e32a604f5c01d8af59ff0f6c14102eb82a7
+[exit code 0]
+
+$ docker inspect 0a42e10e4260cae3dd017499fc1bde6df38d7a370a4edc0075f09a60301b7805
+[
+    {
+        "Id": "0a42e10e4260cae3dd017499fc1bde6df38d7a370a4edc0075f09a60301b7805",
+        "Created": "2026-11-26T08:26:15.092833749Z",
+        "Path": "python",
+        "Args": [
+            "-m",
+            "uvicorn",
+            "app:app",
+            "--host",
+            "0.0.0.0",
+            "--port",
+            "8000"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 5616,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-11-26T08:26:26.15004017Z",
+            "FinishedAt": "0001-01-01T00:00:00Z",
+            "Health": {
+                "Status": "healthy",
+                "FailingStreak": 0,
+                "Log": [
+                    {
+                        "Start": "2026-11-26T08:26:31.751311792Z",
+                        "End": "2026-11-26T08:26:32.323459382Z",
+                        "ExitCode": 0,
+                        "Output": ""
+                    }
+                ]
+            }
+        },
+        "Image": "sha256:ce8c3f4041ce0b5d2f537a346bb4c5d55e0659f4c7cab210312f180c692955b2",
+        "ResolvConfPath": "/var/lib/docker/containers/0a42e10e4260cae3dd017499fc1bde6df38d7a370a4edc0075f09a60301b7805/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/0a42e10e4260cae3dd017499fc1bde6df38d7a370a4edc0075f09a60301b7805/hostname",
+        "HostsPath": "/var/lib/docker/containers/0a42e10e4260cae3dd017499fc1bde6df38d7a370a4edc0075f09a60301b7805/hosts",
+        "LogPath": "",
+        "Name": "/k5-day14-scaling-agent-1",
+        "RestartCount": 0,
+        "Driver": "overlayfs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "local",
+                "Config": {}
+            },
+            "NetworkMode": "k5-day14-scaling_agent_net",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "unless-stopped",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": null,
+            "DnsSearch": null,
+            "ExtraHosts": [],
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 268435456,
+            "NanoCpus": 500000000,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": null,
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 536870912,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/asound",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/sys/devices/virtual/powercap",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "Storage": {
+            "RootFS": {
+                "Snapshot": {
+                    "Name": "overlayfs"
+                }
+            }
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "0a42e10e4260",
+            "Domainname": "",
+            "User": "agent",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "ExposedPorts": {
+                "8000/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PORT=8000",
+                "REDIS_URL=redis://redis:6379/0",
+                "ENVIRONMENT=demo",
+                "PATH=/home/agent/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+                "PYTHON_VERSION=3.11.18",
+                "PYTHON_SHA256=9120e0a653868f6e3698d36cdd99e5a58903ec9469e448f21d98f7b16d8fa290",
+                "PYTHONPATH=/app",
+                "PYTHONDONTWRITEBYTECODE=1",
+                "PYTHONUNBUFFERED=1",
+                "PYTHONUSERBASE=/home/agent/.local"
+            ],
+            "Cmd": [
+                "python",
+                "-m",
+                "uvicorn",
+                "app:app",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000"
+            ],
+            "Healthcheck": {
+                "Test": [
+                    "CMD",
+                    "python",
+                    "-c",
+                    "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"
+                ],
+                "Interval": 15000000000,
+                "Timeout": 5000000000,
+                "StartPeriod": 10000000000,
+                "Retries": 3
+            },
+            "Image": "k5-day14-scaling-agent",
+            "Volumes": null,
+            "WorkingDir": "/app",
+            "Entrypoint": null,
+            "Labels": {
+                "com.docker.compose.config-hash": "e76fa8dd1ee85fa69cfad86aafa86da1ba1fdacc4824944ee2a82c82cc5918e6",
+                "com.docker.compose.container-number": "1",
+                "com.docker.compose.depends_on": "redis:service_healthy:false",
+                "com.docker.compose.image": "sha256:db6df53bc652b53dd4b856968a0deb241e387cd1713ffee4e271438cab1f1520",
+                "com.docker.compose.oneoff": "False",
+                "com.docker.compose.project": "k5-day14-scaling",
+                "com.docker.compose.project.config_files": "/mnt/c/Users/nguye/Downloads/AITC_K5/DAY14/LAB14/K5-L3B-DAY14-NguyenDucHieu-2A202603772-Deployment-Benchmark-Observability/05-scaling-reliability/production/docker-compose.yml",
+                "com.docker.compose.project.working_dir": "/mnt/c/Users/nguye/Downloads/AITC_K5/DAY14/LAB14/K5-L3B-DAY14-NguyenDucHieu-2A202603772-Deployment-Benchmark-Observability/05-scaling-reliability/production",
+                "com.docker.compose.service": "agent",
+                "com.docker.compose.version": "5.7.0",
+                "desktop.docker.io/wsl-distro": "Ubuntu-24.04"
+            }
+        },
+        "NetworkSettings": {
+            "SandboxID": "b206770ef481cfda1cf641cb9e40e3f6e71c61dcc2bbc47837a54bef7f326545",
+            "SandboxKey": "/var/run/docker/netns/b206770ef481",
+            "Ports": {
+                "8000/tcp": null
+            },
+            "Networks": {
+                "k5-day14-scaling_agent_net": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "k5-day14-scaling-agent-1",
+                        "agent"
+                    ],
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "f90ab519985c74e86a135326d443840e85aa78255840df2480d000753900b6fc",
+                    "EndpointID": "758d6c76fcb0182ad2cfebf00c710f632e0f67683049935fb60c97a51b092746",
+                    "Gateway": "172.20.0.1",
+                    "IPAddress": "172.20.0.3",
+                    "MacAddress": "d2:40:c8:92:03:84",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": [
+                        "k5-day14-scaling-agent-1",
+                        "agent",
+                        "0a42e10e4260"
+                    ]
+                }
+            }
+        },
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:db6df53bc652b53dd4b856968a0deb241e387cd1713ffee4e271438cab1f1520",
+            "size": 2190,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        }
+    }
+]
+[exit code 0]
+
+$ docker inspect 491768c007d15e885c0ff7f7fde4836c7b6c42005f4017d76851d958e2a986b4
+[
+    {
+        "Id": "491768c007d15e885c0ff7f7fde4836c7b6c42005f4017d76851d958e2a986b4",
+        "Created": "2026-11-26T08:26:15.089971325Z",
+        "Path": "python",
+        "Args": [
+            "-m",
+            "uvicorn",
+            "app:app",
+            "--host",
+            "0.0.0.0",
+            "--port",
+            "8000"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 5673,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-11-26T08:26:26.326809052Z",
+            "FinishedAt": "0001-01-01T00:00:00Z",
+            "Health": {
+                "Status": "healthy",
+                "FailingStreak": 0,
+                "Log": [
+                    {
+                        "Start": "2026-11-26T08:26:31.945493064Z",
+                        "End": "2026-11-26T08:26:32.57252261Z",
+                        "ExitCode": 0,
+                        "Output": ""
+                    }
+                ]
+            }
+        },
+        "Image": "sha256:ce8c3f4041ce0b5d2f537a346bb4c5d55e0659f4c7cab210312f180c692955b2",
+        "ResolvConfPath": "/var/lib/docker/containers/491768c007d15e885c0ff7f7fde4836c7b6c42005f4017d76851d958e2a986b4/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/491768c007d15e885c0ff7f7fde4836c7b6c42005f4017d76851d958e2a986b4/hostname",
+        "HostsPath": "/var/lib/docker/containers/491768c007d15e885c0ff7f7fde4836c7b6c42005f4017d76851d958e2a986b4/hosts",
+        "LogPath": "",
+        "Name": "/k5-day14-scaling-agent-2",
+        "RestartCount": 0,
+        "Driver": "overlayfs",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "local",
+                "Config": {}
+            },
+            "NetworkMode": "k5-day14-scaling_agent_net",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "unless-stopped",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": null,
+            "DnsSearch": null,
+            "ExtraHosts": [],
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 268435456,
+            "NanoCpus": 500000000,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": null,
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 536870912,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/acpi",
+                "/proc/asound",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/sys/devices/virtual/powercap",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "Storage": {
+            "RootFS": {
+                "Snapshot": {
+                    "Name": "overlayfs"
+                }
+            }
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "491768c007d1",
+            "Domainname": "",
+            "User": "agent",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "ExposedPorts": {
+                "8000/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "REDIS_URL=redis://redis:6379/0",
+                "ENVIRONMENT=demo",
+                "PORT=8000",
+                "PATH=/home/agent/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=A035C8C19219BA821ECEA86B64E628F8D684696D",
+                "PYTHON_VERSION=3.11.18",
+                "PYTHON_SHA256=9120e0a653868f6e3698d36cdd99e5a58903ec9469e448f21d98f7b16d8fa290",
+                "PYTHONPATH=/app",
+                "PYTHONDONTWRITEBYTECODE=1",
+                "PYTHONUNBUFFERED=1",
+                "PYTHONUSERBASE=/home/agent/.local"
+            ],
+            "Cmd": [
+                "python",
+                "-m",
+                "uvicorn",
+                "app:app",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000"
+            ],
+            "Healthcheck": {
+                "Test": [
+                    "CMD",
+                    "python",
+                    "-c",
+                    "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"
+                ],
+                "Interval": 15000000000,
+                "Timeout": 5000000000,
+                "StartPeriod": 10000000000,
+                "Retries": 3
+            },
+            "Image": "k5-day14-scaling-agent",
+            "Volumes": null,
+            "WorkingDir": "/app",
+            "Entrypoint": null,
+            "Labels": {
+                "com.docker.compose.config-hash": "e76fa8dd1ee85fa69cfad86aafa86da1ba1fdacc4824944ee2a82c82cc5918e6",
+                "com.docker.compose.container-number": "2",
+                "com.docker.compose.depends_on": "redis:service_healthy:false",
+                "com.docker.compose.image": "sha256:db6df53bc652b53dd4b856968a0deb241e387cd1713ffee4e271438cab1f1520",
+                "com.docker.compose.oneoff": "False",
+                "com.docker.compose.project": "k5-day14-scaling",
+                "com.docker.compose.project.config_files": "/mnt/c/Users/nguye/Downloads/AITC_K5/DAY14/LAB14/K5-L3B-DAY14-NguyenDucHieu-2A202603772-Deployment-Benchmark-Observability/05-scaling-reliability/production/docker-compose.yml",
+                "com.docker.compose.project.working_dir": "/mnt/c/Users/nguye/Downloads/AITC_K5/DAY14/LAB14/K5-L3B-DAY14-NguyenDucHieu-2A202603772-Deployment-Benchmark-Observability/05-scaling-reliability/production",
+                "com.docker.compose.service": "agent",
+                "com.docker.compose.version": "5.7.0",
+                "desktop.docker.io/wsl-distro": "Ubuntu-24.04"
+            }
+        },
+        "NetworkSettings": {
+            "SandboxID": "2dbb65d3f64e745cbffb60bce16ea6d790b4ba3e1fbe269ee629530ab5a7e684",
+            "SandboxKey": "/var/run/docker/netns/2dbb65d3f64e",
+            "Ports": {
+                "8000/tcp": null
+            },
+            "Networks": {
+                "k5-day14-scaling_agent_net": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "k5-day14-scaling-agent-2",
+                        "agent"
+                    ],
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "f90ab519985c74e86a135326d443840e85aa78255840df2480d000753900b6fc",
+                    "EndpointID": "dff331716a1d88ae192ee9d0a3e652309c5fa6cb68f55830d7707d7805dfa477",
+                    "Gateway": "172.20.0.1",
+                    "IPAddress": "172.20.0.4",
+                    "MacAddress": "c6:e7:dd:9c:5a:89",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": [
+                        "k5-day14-scaling-agent-2",
+                        "agent",
+                        "491768c007d1"
+                    ]
+                }
+            }
+        },
+        "ImageManifestDescriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:db6df53bc652b53dd4b856968a0deb241e387cd1713ffee4e271438cab1f1520",
+            "size": 2190,
+            "platform": {
+                "architecture": "amd64",
+                "os": "linux"
+            }
+        }
+    }
+]
+[exit code 0]
+
+$ docker stop --time 10 491768c007d15e885c0ff7f7fde4836c7b6c42005f4017d76851d958e2a986b4
+Flag --time has been deprecated, use --timeout instead
+491768c007d15e885c0ff7f7fde4836c7b6c42005f4017d76851d958e2a986b4
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' -X POST -H 'Content-Type: application/json' --data '{"question": "After stopping the serving instance", "session_id": "cd653179-a8ea-452d-a2d4-7e4c067230f7"}' http://127.0.0.1:8080/chat
+HTTP/1.1 200 OK
+Server: nginx/1.31.10
+Date: Thu, 26 Nov 2026 08:26:35 GMT
+Content-Type: application/json
+Content-Length: 253
+Connection: keep-alive
+X-Served-By: 172.20.0.5:8000
+
+{"session_id":"cd653179-a8ea-452d-a2d4-7e4c067230f7","question":"After stopping the serving instance","answer":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.","turn":3,"served_by":"instance-115be4","storage":"redis"}
+CP_STATUS:200
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' http://127.0.0.1:8080/chat/cd653179-a8ea-452d-a2d4-7e4c067230f7/history
+HTTP/1.1 200 OK
+Server: nginx/1.31.10
+Date: Thu, 26 Nov 2026 08:26:35 GMT
+Content-Type: application/json
+Content-Length: 616
+Connection: keep-alive
+X-Served-By: 172.20.0.3:8000
+
+{"session_id":"cd653179-a8ea-452d-a2d4-7e4c067230f7","messages":[{"role":"user","content":"Before stopping an instance","timestamp":"2026-11-26T08:26:33.904329+00:00"},{"role":"assistant","content":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.","timestamp":"2026-11-26T08:26:34.018407+00:00"},{"role":"user","content":"After stopping the serving instance","timestamp":"2026-11-26T08:26:34.940063+00:00"},{"role":"assistant","content":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.","timestamp":"2026-11-26T08:26:35.052648+00:00"}],"count":4}
+CP_STATUS:200
+[exit code 0]
+
+$ docker compose -p k5-day14-scaling stop redis
+ Container k5-day14-scaling-redis-1 Stopping 
+ Container k5-day14-scaling-redis-1 Stopped
+[exit code 0]
+
+$ docker exec 0a42e10e4260cae3dd017499fc1bde6df38d7a370a4edc0075f09a60301b7805 python -c 'import urllib.request, urllib.error
+statuses=[]
+for path in ('"'"'/health'"'"','"'"'/ready'"'"'):
+ try:
+  response=urllib.request.urlopen('"'"'http://127.0.0.1:8000'"'"'+path, timeout=8)
+ except urllib.error.HTTPError as exc: response=exc
+ statuses.append(response.status)
+ print(path,response.status,response.read().decode())
+assert statuses==[200,503],statuses
+'
+/health 200 {"status":"degraded","instance_id":"instance-e2e8b5","uptime_seconds":11.7,"storage":"redis","redis_connected":false}
+/ready 503 {"detail":"Redis not available"}
+[exit code 0]
+
+$ docker exec c3957069ab6b2b10aa6eccde05f70e32a604f5c01d8af59ff0f6c14102eb82a7 python -c 'import urllib.request, urllib.error
+statuses=[]
+for path in ('"'"'/health'"'"','"'"'/ready'"'"'):
+ try:
+  response=urllib.request.urlopen('"'"'http://127.0.0.1:8000'"'"'+path, timeout=8)
+ except urllib.error.HTTPError as exc: response=exc
+ statuses.append(response.status)
+ print(path,response.status,response.read().decode())
+assert statuses==[200,503],statuses
+'
+/health 200 {"status":"degraded","instance_id":"instance-115be4","uptime_seconds":18.3,"storage":"redis","redis_connected":false}
+/ready 503 {"detail":"Redis not available"}
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' http://127.0.0.1:8080/health
+HTTP/1.1 200 OK
+Server: nginx/1.31.10
+Date: Thu, 26 Nov 2026 08:26:55 GMT
+Content-Type: application/json
+Content-Length: 117
+Connection: keep-alive
+X-Served-By: 172.20.0.4:8000, 172.20.0.5:8000
+
+{"status":"degraded","instance_id":"instance-115be4","uptime_seconds":26.6,"storage":"redis","redis_connected":false}
+CP_STATUS:200
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' http://127.0.0.1:8080/ready
+HTTP/1.1 503 Service Unavailable
+Server: nginx/1.31.10
+Date: Thu, 26 Nov 2026 08:26:58 GMT
+Content-Type: application/json
+Content-Length: 32
+Connection: keep-alive
+X-Served-By: 172.20.0.3:8000
+
+{"detail":"Redis not available"}
+CP_STATUS:503
+[exit code 0]
+
+$ docker compose -p k5-day14-scaling ps -a
+NAME                       IMAGE                    COMMAND                  SERVICE   CREATED          STATUS                      PORTS
+k5-day14-scaling-agent-1   k5-day14-scaling-agent   "python -m uvicorn a…"   agent     43 seconds ago   Up 32 seconds (healthy)     8000/tcp
+k5-day14-scaling-agent-2   k5-day14-scaling-agent   "python -m uvicorn a…"   agent     43 seconds ago   Exited (0) 23 seconds ago   
+k5-day14-scaling-agent-3   k5-day14-scaling-agent   "python -m uvicorn a…"   agent     43 seconds ago   Up 31 seconds (healthy)     8000/tcp
+k5-day14-scaling-nginx-1   nginx:alpine             "/docker-entrypoint.…"   nginx     43 seconds ago   Up 31 seconds               0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
+k5-day14-scaling-redis-1   redis:7-alpine           "docker-entrypoint.s…"   redis     44 seconds ago   Exited (0) 23 seconds ago
+[exit code 0]
+
+$ docker compose -p k5-day14-scaling logs --no-color
+agent-3  | ✅ Connected to Redis
+agent-3  | INFO:     Started server process [1]
+agent-3  | INFO:     Waiting for application startup.
+agent-3  | INFO:app:Starting instance instance-115be4
+agent-3  | INFO:app:Storage: Redis ✅
+agent-3  | INFO:     Application startup complete.
+agent-3  | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+agent-3  | INFO:     127.0.0.1:42036 - "GET /health HTTP/1.1" 200 OK
+agent-3  | INFO:     172.20.0.6:52832 - "GET /health HTTP/1.1" 200 OK
+agent-3  | INFO:     172.20.0.6:52832 - "POST /chat HTTP/1.1" 200 OK
+agent-3  | INFO:     172.20.0.6:52832 - "GET /chat/04c59eb2-2196-4c40-82cf-c38053cd4aa7/history HTTP/1.1" 200 OK
+agent-3  | INFO:     172.20.0.6:52832 - "POST /chat HTTP/1.1" 200 OK
+agent-3  | INFO:     127.0.0.1:34566 - "GET /health HTTP/1.1" 200 OK
+agent-3  | INFO:     127.0.0.1:60674 - "GET /ready HTTP/1.1" 503 Service Unavailable
+agent-3  | INFO:     127.0.0.1:60696 - "GET /health HTTP/1.1" 200 OK
+agent-3  | INFO:     172.20.0.6:51354 - "GET /health HTTP/1.1" 200 OK
+redis-1  | 1:C 26 Nov 2026 08:26:15.603 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1  | 1:C 26 Nov 2026 08:26:15.603 * Redis version=7.4.12, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1  | 1:C 26 Nov 2026 08:26:15.603 * Configuration loaded
+redis-1  | 1:M 26 Nov 2026 08:26:15.604 * monotonic clock: POSIX clock_gettime
+redis-1  | 1:M 26 Nov 2026 08:26:15.608 * Running mode=standalone, port=6379.
+redis-1  | 1:M 26 Nov 2026 08:26:15.609 * Server initialized
+redis-1  | 1:M 26 Nov 2026 08:26:15.609 * Ready to accept connections tcp
+redis-1  | 1:signal-handler (1795681595) Received SIGTERM scheduling shutdown...
+redis-1  | 1:M 26 Nov 2026 08:26:35.303 * User requested shutdown...
+redis-1  | 1:M 26 Nov 2026 08:26:35.303 * Saving the final RDB snapshot before exiting.
+redis-1  | 1:M 26 Nov 2026 08:26:35.308 * DB saved on disk
+redis-1  | 1:M 26 Nov 2026 08:26:35.309 # Redis is now ready to exit, bye bye...
+nginx-1  | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+nginx-1  | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+nginx-1  | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+nginx-1  | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+nginx-1  | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+nginx-1  | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+nginx-1  | /docker-entrypoint.sh: Configuration complete; ready for start up
+nginx-1  | 172.20.0.1 - - [26/Nov/2026:08:26:33 +0000] "POST /chat HTTP/1.1" 200 241 "-" "Python-urllib/3.12"
+nginx-1  | 172.20.0.1 - - [26/Nov/2026:08:26:33 +0000] "POST /chat HTTP/1.1" 200 252 "-" "Python-urllib/3.12"
+nginx-1  | 172.20.0.1 - - [26/Nov/2026:08:26:33 +0000] "POST /chat HTTP/1.1" 200 268 "-" "Python-urllib/3.12"
+nginx-1  | 172.20.0.1 - - [26/Nov/2026:08:26:33 +0000] "POST /chat HTTP/1.1" 200 247 "-" "Python-urllib/3.12"
+nginx-1  | 172.20.0.1 - - [26/Nov/2026:08:26:33 +0000] "POST /chat HTTP/1.1" 200 241 "-" "Python-urllib/3.12"
+nginx-1  | 172.20.0.1 - - [26/Nov/2026:08:26:33 +0000] "GET /chat/04c59eb2-2196-4c40-82cf-c38053cd4aa7/history HTTP/1.1" 200 1431 "-" "Python-urllib/3.12"
+nginx-1  | 172.20.0.1 - - [26/Nov/2026:08:26:33 +0000] "GET /chat/04c59eb2-2196-4c40-82cf-c38053cd4aa7/history HTTP/1.1" 200 1431 "-" "curl/8.5.0"
+nginx-1  | 172.20.0.1 - - [26/Nov/2026:08:26:34 +0000] "POST /chat HTTP/1.1" 200 245 "-" "curl/8.5.0"
+nginx-1  | 172.20.0.1 - - [26/Nov/2026:08:26:35 +0000] "POST /chat HTTP/1.1" 200 253 "-" "curl/8.5.0"
+nginx-1  | 172.20.0.1 - - [26/Nov/2026:08:26:35 +0000] "GET /chat/cd653179-a8ea-452d-a2d4-7e4c067230f7/history HTTP/1.1" 200 616 "-" "curl/8.5.0"
+nginx-1  | 2026/11/26 08:26:52 [error] 30#30: *15 upstream timed out (110: Operation timed out) while connecting to upstream, client: 172.20.0.1, server: , request: "GET /health HTTP/1.1", upstream: "http://172.20.0.4:8000/health", host: "127.0.0.1:8080"
+nginx-1  | 172.20.0.1 - - [26/Nov/2026:08:26:58 +0000] "GET /ready HTTP/1.1" 503 32 "-" "curl/8.5.0"
+agent-1  | ✅ Connected to Redis
+agent-1  | INFO:     Started server process [1]
+agent-1  | INFO:     Waiting for application startup.
+agent-1  | INFO:app:Starting instance instance-e2e8b5
+agent-1  | INFO:app:Storage: Redis ✅
+agent-1  | INFO:     Application startup complete.
+agent-1  | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+agent-1  | INFO:     127.0.0.1:42018 - "GET /health HTTP/1.1" 200 OK
+agent-1  | INFO:     172.20.0.6:60760 - "POST /chat HTTP/1.1" 200 OK
+agent-1  | INFO:     172.20.0.6:60760 - "POST /chat HTTP/1.1" 200 OK
+agent-1  | INFO:     172.20.0.6:60760 - "GET /chat/04c59eb2-2196-4c40-82cf-c38053cd4aa7/history HTTP/1.1" 200 OK
+agent-1  | INFO:     172.20.0.6:60760 - "GET /chat/cd653179-a8ea-452d-a2d4-7e4c067230f7/history HTTP/1.1" 200 OK
+agent-1  | INFO:     127.0.0.1:34536 - "GET /health HTTP/1.1" 200 OK
+agent-1  | INFO:     127.0.0.1:34550 - "GET /ready HTTP/1.1" 503 Service Unavailable
+agent-1  | INFO:     127.0.0.1:60686 - "GET /health HTTP/1.1" 200 OK
+agent-1  | INFO:     172.20.0.6:51610 - "GET /ready HTTP/1.1" 503 Service Unavailable
+agent-2  | ✅ Connected to Redis
+agent-2  | INFO:     Started server process [1]
+agent-2  | INFO:     Waiting for application startup.
+agent-2  | INFO:app:Starting instance instance-f78e91
+agent-2  | INFO:app:Storage: Redis ✅
+agent-2  | INFO:     Application startup complete.
+agent-2  | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+agent-2  | INFO:     127.0.0.1:42028 - "GET /health HTTP/1.1" 200 OK
+agent-2  | INFO:     172.20.0.6:49884 - "POST /chat HTTP/1.1" 200 OK
+agent-2  | INFO:     172.20.0.6:49884 - "POST /chat HTTP/1.1" 200 OK
+agent-2  | INFO:     172.20.0.6:49884 - "POST /chat HTTP/1.1" 200 OK
+agent-2  | INFO:     Shutting down
+agent-2  | INFO:     Waiting for application shutdown.
+agent-2  | INFO:app:Instance instance-f78e91 shutting down
+agent-2  | INFO:     Application shutdown complete.
+agent-2  | INFO:     Finished server process [1]
+[exit code 0]
+
+$ docker compose -p k5-day14-scaling down --volumes
+ Container k5-day14-scaling-nginx-1 Stopping 
+ Container k5-day14-scaling-nginx-1 Stopped 
+ Container k5-day14-scaling-nginx-1 Removing 
+ Container k5-day14-scaling-nginx-1 Removed 
+ Container k5-day14-scaling-agent-2 Stopping 
+ Container k5-day14-scaling-agent-3 Stopping 
+ Container k5-day14-scaling-agent-1 Stopping 
+ Container k5-day14-scaling-agent-2 Stopped 
+ Container k5-day14-scaling-agent-2 Removing 
+ Container k5-day14-scaling-agent-2 Removed 
+ Container k5-day14-scaling-agent-3 Stopped 
+ Container k5-day14-scaling-agent-3 Removing 
+ Container k5-day14-scaling-agent-3 Removed 
+ Container k5-day14-scaling-agent-1 Stopped 
+ Container k5-day14-scaling-agent-1 Removing 
+ Container k5-day14-scaling-agent-1 Removed 
+ Container k5-day14-scaling-redis-1 Stopping 
+ Container k5-day14-scaling-redis-1 Stopped 
+ Container k5-day14-scaling-redis-1 Removing 
+ Container k5-day14-scaling-redis-1 Removed 
+ Network k5-day14-scaling_agent_net Removing 
+ Network k5-day14-scaling_agent_net Removed
+[exit code 0]
+

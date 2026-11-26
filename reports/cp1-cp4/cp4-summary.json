@@ -1,0 +1,112 @@
+{
+  "develop_health": {
+    "status": 200,
+    "headers": {
+      "date": "Thu, 26 Nov 2026 08:26:08 GMT",
+      "server": "uvicorn",
+      "content-length": "185",
+      "content-type": "application/json"
+    },
+    "body": {
+      "status": "ok",
+      "uptime_seconds": 1.0,
+      "version": "1.0.0",
+      "environment": "development",
+      "timestamp": "2026-11-26T08:26:08.831252+00:00",
+      "checks": {
+        "memory": {
+          "status": "ok",
+          "used_percent": 14.3
+        }
+      }
+    }
+  },
+  "develop_ready": {
+    "status": 200,
+    "headers": {
+      "date": "Thu, 26 Nov 2026 08:26:08 GMT",
+      "server": "uvicorn",
+      "content-length": "37",
+      "content-type": "application/json"
+    },
+    "body": {
+      "ready": true,
+      "in_flight_requests": 1
+    }
+  },
+  "shutdown_inflight_status": 200,
+  "shutdown_exit_code": 0,
+  "shutdown_seconds": 3.222,
+  "provided_history_count": 10,
+  "before_stop": {
+    "status": 200,
+    "headers": {
+      "Server": "nginx/1.31.10",
+      "Date": "Thu, 26 Nov 2026 08:26:34 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "245",
+      "Connection": "keep-alive",
+      "X-Served-By": "172.20.0.4:8000"
+    },
+    "body": {
+      "session_id": "cd653179-a8ea-452d-a2d4-7e4c067230f7",
+      "question": "Before stopping an instance",
+      "answer": "Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.",
+      "turn": 2,
+      "served_by": "instance-f78e91",
+      "storage": "redis"
+    }
+  },
+  "after_stop": {
+    "status": 200,
+    "headers": {
+      "Server": "nginx/1.31.10",
+      "Date": "Thu, 26 Nov 2026 08:26:35 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "253",
+      "Connection": "keep-alive",
+      "X-Served-By": "172.20.0.5:8000"
+    },
+    "body": {
+      "session_id": "cd653179-a8ea-452d-a2d4-7e4c067230f7",
+      "question": "After stopping the serving instance",
+      "answer": "Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé.",
+      "turn": 3,
+      "served_by": "instance-115be4",
+      "storage": "redis"
+    }
+  },
+  "history_after_stop": 4,
+  "redis_down_health": {
+    "status": 200,
+    "headers": {
+      "Server": "nginx/1.31.10",
+      "Date": "Thu, 26 Nov 2026 08:26:55 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "117",
+      "Connection": "keep-alive",
+      "X-Served-By": "172.20.0.4:8000, 172.20.0.5:8000"
+    },
+    "body": {
+      "status": "degraded",
+      "instance_id": "instance-115be4",
+      "uptime_seconds": 26.6,
+      "storage": "redis",
+      "redis_connected": false
+    }
+  },
+  "redis_down_ready": {
+    "status": 503,
+    "headers": {
+      "Server": "nginx/1.31.10",
+      "Date": "Thu, 26 Nov 2026 08:26:58 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "32",
+      "Connection": "keep-alive",
+      "X-Served-By": "172.20.0.3:8000"
+    },
+    "body": {
+      "detail": "Redis not available"
+    }
+  }
+}

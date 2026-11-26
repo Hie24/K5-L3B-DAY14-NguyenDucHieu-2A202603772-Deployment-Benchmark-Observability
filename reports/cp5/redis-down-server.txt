@@ -1,0 +1,31 @@
+INFO:     Uvicorn running on http://127.0.0.1:59095 (Press CTRL+C to quit)
+INFO:     Started parent process [4669]
+INFO:     Started server process [4673]
+INFO:     Waiting for application startup.
+INFO:     Started server process [4672]
+INFO:     Waiting for application startup.
+{"ts": "2026-11-26T08:49:37.733875+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+{"ts": "2026-11-26T08:49:37.733889+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+{"ts": "2026-11-26T08:49:38.042842+00:00", "level": "INFO", "event": "http_request", "request_id": "1897ae556ba0490f84673cbcbb0f1303", "method": "GET", "path": "/health", "status": 200, "ms": 1.709}
+{"ts": "2026-11-26T08:49:38.044936+00:00", "level": "INFO", "event": "http_request", "request_id": "8a7aea4f6fa74e519c3d6e1f8ef5b3a6", "method": "GET", "path": "/health", "status": 200, "ms": 0.562}
+{"ts": "2026-11-26T08:49:38.047749+00:00", "level": "INFO", "event": "http_request", "request_id": "2371c620d99b4f9eb4d5a675b8858634", "method": "GET", "path": "/ready", "status": 503, "ms": 2.233}
+{"ts": "2026-11-26T08:49:38.051483+00:00", "level": "WARNING", "event": "storage_unavailable", "request_id": "16072ec9e19a4e7189d147d331b1e078", "error_type": "ConnectionError"}
+{"ts": "2026-11-26T08:49:38.051683+00:00", "level": "INFO", "event": "http_request", "request_id": "16072ec9e19a4e7189d147d331b1e078", "method": "POST", "path": "/ask", "status": 503, "ms": 3.22}
+INFO:     Received SIGTERM, exiting.
+INFO:     Terminated child process [4672]
+INFO:     Terminated child process [4673]
+INFO:     Waiting for child process [4672]
+INFO:     Shutting down
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T08:49:38.443881+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4672]
+INFO:     Waiting for child process [4673]
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T08:49:38.537366+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4673]
+INFO:     Stopping parent process [4669]

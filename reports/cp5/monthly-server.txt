@@ -1,0 +1,28 @@
+INFO:     Uvicorn running on http://127.0.0.1:53527 (Press CTRL+C to quit)
+INFO:     Started parent process [4360]
+INFO:     Started server process [4374]
+INFO:     Waiting for application startup.
+INFO:     Started server process [4373]
+INFO:     Waiting for application startup.
+{"ts": "2026-11-26T08:49:16.295225+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+{"ts": "2026-11-26T08:49:16.295318+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+{"ts": "2026-11-26T08:49:16.522776+00:00", "level": "INFO", "event": "http_request", "request_id": "d50d011947a9426ebc53fdf36142850f", "method": "GET", "path": "/health", "status": 200, "ms": 2.222}
+{"ts": "2026-11-26T08:49:16.531083+00:00", "level": "INFO", "event": "http_request", "request_id": "885ab01d032b4335aae719e97c6b554f", "method": "POST", "path": "/ask", "status": 402, "ms": 6.863}
+INFO:     Received SIGTERM, exiting.
+INFO:     Terminated child process [4373]
+INFO:     Terminated child process [4374]
+INFO:     Waiting for child process [4373]
+INFO:     Shutting down
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T08:49:16.998145+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4374]
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T08:49:17.022573+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4373]
+INFO:     Waiting for child process [4374]
+INFO:     Stopping parent process [4360]

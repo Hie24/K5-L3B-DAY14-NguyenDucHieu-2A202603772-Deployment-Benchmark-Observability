@@ -1,0 +1,30 @@
+INFO:     Uvicorn running on http://127.0.0.1:38149 (Press CTRL+C to quit)
+INFO:     Started parent process [5016]
+INFO:     Started server process [5020]
+INFO:     Waiting for application startup.
+INFO:     Started server process [5019]
+INFO:     Waiting for application startup.
+{"ts": "2026-11-26T09:09:19.470793+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+{"ts": "2026-11-26T09:09:19.470801+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+{"ts": "2026-11-26T09:09:19.757942+00:00", "level": "INFO", "event": "http_request", "request_id": "2e77d62680064a798db42cd08521053d", "method": "GET", "path": "/health", "status": 200, "ms": 1.581}
+{"ts": "2026-11-26T09:09:19.891709+00:00", "level": "INFO", "event": "http_request", "request_id": "cd71ae2a73604e6293c0334ed1eba5e0", "method": "POST", "path": "/ask", "status": 429, "ms": 6.22}
+{"ts": "2026-11-26T09:09:20.014923+00:00", "level": "INFO", "event": "llm_call", "provider": "mock", "model": "mock", "input_tokens": 2, "output_tokens": 23, "cost_usd": 1.41e-05, "usage_source": "mock_estimate"}
+{"ts": "2026-11-26T09:09:20.015315+00:00", "level": "INFO", "event": "http_request", "request_id": "7495bfe3da30444395973968e81cb8bc", "method": "POST", "path": "/ask", "status": 200, "ms": 121.035}
+INFO:     Received SIGTERM, exiting.
+INFO:     Terminated child process [5019]
+INFO:     Terminated child process [5020]
+INFO:     Waiting for child process [5019]
+INFO:     Shutting down
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T09:09:20.288201+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5020]
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T09:09:20.359196+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5019]
+INFO:     Waiting for child process [5020]
+INFO:     Stopping parent process [5016]

@@ -1,0 +1,79 @@
+{
+  "missing_key": 401,
+  "wrong_key": 403,
+  "valid_key": 200,
+  "jwt_login": 200,
+  "jwt_ask": 200,
+  "burst_statuses": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    429,
+    429,
+    429,
+    429,
+    429,
+    429,
+    429,
+    429,
+    429,
+    429
+  ],
+  "throttled": {
+    "status": 429,
+    "headers": {
+      "date": "Thu, 26 Nov 2026 08:14:24 GMT",
+      "server": "uvicorn",
+      "x-ratelimit-limit": "10",
+      "x-ratelimit-remaining": "0",
+      "x-ratelimit-reset": "1795680925",
+      "retry-after": "58",
+      "content-length": "98",
+      "content-type": "application/json",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY",
+      "x-xss-protection": "1; mode=block",
+      "referrer-policy": "strict-origin-when-cross-origin"
+    },
+    "body": {
+      "detail": {
+        "error": "Rate limit exceeded",
+        "limit": 10,
+        "window_seconds": 60,
+        "retry_after_seconds": 58
+      }
+    }
+  },
+  "usage": {
+    "status": 200,
+    "headers": {
+      "date": "Thu, 26 Nov 2026 08:14:24 GMT",
+      "server": "uvicorn",
+      "content-length": "184",
+      "content-type": "application/json",
+      "x-content-type-options": "nosniff",
+      "x-frame-options": "DENY",
+      "x-xss-protection": "1; mode=block",
+      "referrer-policy": "strict-origin-when-cross-origin"
+    },
+    "body": {
+      "user_id": "student",
+      "date": "2026-11-26",
+      "requests": 10,
+      "input_tokens": 40,
+      "output_tokens": 312,
+      "cost_usd": 0.000193,
+      "budget_usd": 1.0,
+      "budget_remaining_usd": 0.999807,
+      "budget_used_pct": 0.0
+    }
+  },
+  "synthetic_cost_guard_status": 402
+}

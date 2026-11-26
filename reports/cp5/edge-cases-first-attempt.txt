@@ -1,0 +1,22 @@
+test_atomic_daily_budget_and_monthly_limit (__main__.ProductionTests.test_atomic_daily_budget_and_monthly_limit) ... ok
+test_atomic_rate_limit_restart_and_expired_window (__main__.ProductionTests.test_atomic_rate_limit_restart_and_expired_window) ... ERROR
+test_auth_validation_and_json_logs (__main__.ProductionTests.test_auth_validation_and_json_logs) ... ok
+test_budget_refund_and_period_boundary (__main__.ProductionTests.test_budget_refund_and_period_boundary) ... ok
+test_redis_unavailable_fails_closed (__main__.ProductionTests.test_redis_unavailable_fails_closed) ... ok
+
+======================================================================
+ERROR: test_atomic_rate_limit_restart_and_expired_window (__main__.ProductionTests.test_atomic_rate_limit_restart_and_expired_window)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/nguye/Downloads/AITC_K5/DAY14/LAB14/K5-L3B-DAY14-NguyenDucHieu-2A202603772-Deployment-Benchmark-Observability/06-lab-complete/tests/test_production.py", line 150, in test_atomic_rate_limit_restart_and_expired_window
+    self.assertTrue(all(int(reply[1]["Retry-After"]) >= 1 for reply in replies if reply[0] == 429))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/nguye/Downloads/AITC_K5/DAY14/LAB14/K5-L3B-DAY14-NguyenDucHieu-2A202603772-Deployment-Benchmark-Observability/06-lab-complete/tests/test_production.py", line 150, in <genexpr>
+    self.assertTrue(all(int(reply[1]["Retry-After"]) >= 1 for reply in replies if reply[0] == 429))
+                            ~~~~~~~~^^^^^^^^^^^^^^^
+KeyError: 'Retry-After'
+
+----------------------------------------------------------------------
+Ran 5 tests in 24.488s
+
+FAILED (errors=1)

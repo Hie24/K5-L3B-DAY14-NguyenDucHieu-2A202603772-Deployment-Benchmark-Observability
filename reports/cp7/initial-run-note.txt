@@ -1,0 +1,14 @@
+2026-11-26 CP7 initial baseline run
+
+Completed: eval_v1, eval_v2, eval_v1_regression, load_v2_c1, load_v2_c10,
+load_v2_c50, load_v2_c100. All seven JSON reports and transcripts retained.
+
+The runner then failed before starting the first slow-rate server:
+  scripts/run_cp7.py, start(): probe.bind(("127.0.0.1", port))
+  OSError: [Errno 98] Address already in use
+
+The previous child had exited; a plain bind probe can reject a port with
+TIME_WAIT sockets. Added SO_REUSEADDR to the probe and a separate tail recovery
+phase. The tail phase successfully started/stopped three v2 processes on port
+8002 and retained all three measurements. No completed benchmark was rerun or
+overwritten. The original baseline manifest remains completed=false.

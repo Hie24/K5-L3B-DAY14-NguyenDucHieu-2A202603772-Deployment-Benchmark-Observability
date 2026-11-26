@@ -1,0 +1,40 @@
+INFO:     Uvicorn running on http://127.0.0.1:58821 (Press CTRL+C to quit)
+INFO:     Started parent process [5025]
+INFO:     Started server process [5029]
+INFO:     Waiting for application startup.
+INFO:     Started server process [5028]
+INFO:     Waiting for application startup.
+{"ts": "2026-11-26T09:09:24.108636+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+{"ts": "2026-11-26T09:09:24.108643+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+{"ts": "2026-11-26T09:09:24.487630+00:00", "level": "INFO", "event": "http_request", "request_id": "78d32bdc047d499ab06b45590ab3daf2", "method": "GET", "path": "/health", "status": 200, "ms": 1.783}
+{"ts": "2026-11-26T09:09:24.497163+00:00", "level": "INFO", "event": "http_request", "request_id": "ef53654add924e1fbcfaae1889545eae", "method": "GET", "path": "/ready", "status": 200, "ms": 7.171}
+{"ts": "2026-11-26T09:09:24.502418+00:00", "level": "INFO", "event": "http_request", "request_id": "bf57571de39f41ee96026c78b78dfbd6", "method": "POST", "path": "/ask", "status": 401, "ms": 3.098}
+{"ts": "2026-11-26T09:09:24.506257+00:00", "level": "INFO", "event": "http_request", "request_id": "0017b9cb2eb741deba6236bdbfed6abb", "method": "POST", "path": "/ask", "status": 401, "ms": 1.778}
+{"ts": "2026-11-26T09:09:24.508444+00:00", "level": "INFO", "event": "http_request", "request_id": "7bf57c56a1724a16b819d1396a835640", "method": "POST", "path": "/ask", "status": 401, "ms": 0.953}
+{"ts": "2026-11-26T09:09:24.512634+00:00", "level": "INFO", "event": "http_request", "request_id": "7cfda878e48a4b1aab1da1474b3404e3", "method": "POST", "path": "/ask", "status": 422, "ms": 3.049}
+{"ts": "2026-11-26T09:09:24.514863+00:00", "level": "INFO", "event": "http_request", "request_id": "ab6dcc86f22d43a090e2e94d2c6c1c49", "method": "POST", "path": "/ask", "status": 422, "ms": 0.967}
+{"ts": "2026-11-26T09:09:24.517075+00:00", "level": "INFO", "event": "http_request", "request_id": "0b85d293f9f242f2a2b3f5a194c7ed29", "method": "POST", "path": "/ask", "status": 422, "ms": 1.237}
+{"ts": "2026-11-26T09:09:24.520067+00:00", "level": "INFO", "event": "http_request", "request_id": "678d3ff6735b4c019559e26255c33940", "method": "POST", "path": "/ask", "status": 422, "ms": 1.87}
+{"ts": "2026-11-26T09:09:24.522286+00:00", "level": "INFO", "event": "http_request", "request_id": "1aa70c7aa7164156be125ddf5dc87030", "method": "POST", "path": "/ask", "status": 422, "ms": 1.03}
+{"ts": "2026-11-26T09:09:24.525163+00:00", "level": "INFO", "event": "http_request", "request_id": "fe5465ec7a2241acb983a359fb55e1e4", "method": "POST", "path": "/ask", "status": 422, "ms": 1.483}
+{"ts": "2026-11-26T09:09:24.527191+00:00", "level": "INFO", "event": "http_request", "request_id": "ebde835cb6a24b218c8c20704ed280ae", "method": "POST", "path": "/ask", "status": 422, "ms": 0.733}
+{"ts": "2026-11-26T09:09:24.671905+00:00", "level": "INFO", "event": "llm_call", "provider": "mock", "model": "mock", "input_tokens": 6, "output_tokens": 23, "cost_usd": 1.47e-05, "usage_source": "mock_estimate"}
+{"ts": "2026-11-26T09:09:24.672621+00:00", "level": "INFO", "event": "http_request", "request_id": "6a6870ff5cbd4cc5a1d145643dbf27c9", "method": "POST", "path": "/ask", "status": 200, "ms": 144.486}
+INFO:     Received SIGTERM, exiting.
+INFO:     Terminated child process [5028]
+INFO:     Terminated child process [5029]
+INFO:     Waiting for child process [5028]
+INFO:     Shutting down
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T09:09:24.989701+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5028]
+INFO:     Waiting for child process [5029]
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T09:09:25.012380+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [5029]
+INFO:     Stopping parent process [5025]

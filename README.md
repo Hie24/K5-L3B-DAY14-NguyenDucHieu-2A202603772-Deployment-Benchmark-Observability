@@ -1,5 +1,15 @@
 # Day 14 — Deployment, Benchmark & Observability
 
+## Hồ sơ bài làm
+
+- [MISSION_ANSWERS.md](MISSION_ANSWERS.md): trả lời Part 1–6, kết quả checker và AI log.
+- [DEPLOYMENT.md](DEPLOYMENT.md): URL Railway, bốn phép thử public, env names và ảnh deployment.
+- [BENCHMARK_REPORT.md](BENCHMARK_REPORT.md): số đo CP7–CP8, eval 23/23, tracing, alerts và scaling.
+- [Agent Part 6](06-lab-complete/README.md): hướng dẫn chạy local/checker; [API public](https://agent-production-74381197.up.railway.app/docs).
+- Bằng chứng: [reports](reports/), [CSV Locust](benchmark-results/), [7 ảnh](screenshots/). [Kiểm tra đóng gói](reports/submission-audit.json).
+
+Phần dưới giữ hướng dẫn gốc của đề. Học viên tự nộp link repo trên LMS và đọc lại code/số liệu để giải thích khi được hỏi.
+
 > Đưa agent lên cloud, đo xem nó nhanh và đúng tới đâu, rồi giám sát nó khi chạy thật.
 
 > **AICB-P1 · VinUniversity 2026**  

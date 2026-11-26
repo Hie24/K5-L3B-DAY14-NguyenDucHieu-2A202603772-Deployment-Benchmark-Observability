@@ -1,0 +1,57 @@
+{
+  "develop": {
+    "status": 200,
+    "headers": {
+      "date": "Thu, 26 Nov 2026 08:14:07 GMT",
+      "server": "uvicorn",
+      "content-length": "95",
+      "content-type": "application/json"
+    },
+    "body": {
+      "answer": "Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé."
+    }
+  },
+  "develop_json_mismatch": 422,
+  "production_health": {
+    "status": 200,
+    "headers": {
+      "date": "Thu, 26 Nov 2026 08:14:11 GMT",
+      "server": "uvicorn",
+      "content-length": "125",
+      "content-type": "application/json"
+    },
+    "body": {
+      "status": "ok",
+      "uptime_seconds": 0.9,
+      "version": "1.0.0",
+      "environment": "staging",
+      "timestamp": "2026-11-26T08:14:11.741922+00:00"
+    }
+  },
+  "production_ready": {
+    "status": 200,
+    "headers": {
+      "date": "Thu, 26 Nov 2026 08:14:11 GMT",
+      "server": "uvicorn",
+      "content-length": "14",
+      "content-type": "application/json"
+    },
+    "body": {
+      "ready": true
+    }
+  },
+  "production_ask": {
+    "status": 200,
+    "headers": {
+      "date": "Thu, 26 Nov 2026 08:14:11 GMT",
+      "server": "uvicorn",
+      "content-length": "170",
+      "content-type": "application/json"
+    },
+    "body": {
+      "question": "What is deployment?",
+      "answer": "Deployment là quá trình đưa code từ máy bạn lên server để người khác dùng được.",
+      "model": "gpt-4o-mini"
+    }
+  }
+}

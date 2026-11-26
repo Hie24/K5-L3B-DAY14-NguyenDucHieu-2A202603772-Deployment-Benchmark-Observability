@@ -1,0 +1,72 @@
+{
+  "basic_ask": {
+    "status": 200,
+    "headers": {
+      "date": "Thu, 26 Nov 2026 08:14:54 GMT",
+      "server": "uvicorn",
+      "content-length": "103",
+      "content-type": "application/json"
+    },
+    "body": {
+      "answer": "Container là cách đóng gói app để chạy ở mọi nơi. Build once, run anywhere!"
+    }
+  },
+  "nginx_health": {
+    "status": 200,
+    "headers": {
+      "Server": "nginx",
+      "Date": "Thu, 26 Nov 2026 08:15:33 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "95",
+      "Connection": "keep-alive",
+      "X-Frame-Options": "DENY",
+      "X-Content-Type-Options": "nosniff",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "body": {
+      "status": "ok",
+      "uptime_seconds": 3.5,
+      "version": "2.0.0",
+      "timestamp": "2026-11-26T08:15:33.167817"
+    }
+  },
+  "nginx_ready": {
+    "status": 200,
+    "headers": {
+      "Server": "nginx",
+      "Date": "Thu, 26 Nov 2026 08:15:33 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "14",
+      "Connection": "keep-alive",
+      "X-Frame-Options": "DENY",
+      "X-Content-Type-Options": "nosniff",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "body": {
+      "ready": true
+    }
+  },
+  "nginx_ask": {
+    "status": 200,
+    "headers": {
+      "Server": "nginx",
+      "Date": "Thu, 26 Nov 2026 08:15:33 GMT",
+      "Content-Type": "application/json",
+      "Content-Length": "126",
+      "Connection": "keep-alive",
+      "X-Frame-Options": "DENY",
+      "X-Content-Type-Options": "nosniff",
+      "X-XSS-Protection": "1; mode=block"
+    },
+    "body": {
+      "answer": "Đây là câu trả lời từ AI agent (mock). Trong production, đây sẽ là response từ OpenAI/Anthropic."
+    }
+  },
+  "sizes_bytes": {
+    "my-agent:develop": 1667784298,
+    "my-agent:advanced": 239819526
+  },
+  "develop_bytes": 1667784298,
+  "production_bytes": 239819526,
+  "reduction_percent": 85.62047104726969
+}

@@ -1,0 +1,57 @@
+
+=== Demo credentials ===
+  student / demo123  (10 req/min, $1/day budget)
+  teacher / teach456 (100 req/min, $1/day budget)
+
+Docs: http://localhost:8000/docs
+
+INFO:     Will watch for changes in these directories: ['/mnt/c/Users/nguye/Downloads/AITC_K5/DAY14/LAB14/K5-L3B-DAY14-NguyenDucHieu-2A202603772-Deployment-Benchmark-Observability/04-api-gateway/production']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [944] using WatchFiles
+INFO:     Started server process [948]
+INFO:     Waiting for application startup.
+INFO:app:Security layer initialized
+INFO:     Application startup complete.
+INFO:     127.0.0.1:58164 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58166 - "POST /ask HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:58178 - "POST /auth/token HTTP/1.1" 200 OK
+INFO:cost_guard:Usage: user=student req=1 cost=$0.0000/1.0
+INFO:     127.0.0.1:58182 - "POST /ask HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58194 - "GET /admin/stats HTTP/1.1" 403 Forbidden
+INFO:cost_guard:Usage: user=student req=2 cost=$0.0000/1.0
+INFO:     127.0.0.1:58202 - "POST /ask HTTP/1.1" 200 OK
+INFO:cost_guard:Usage: user=student req=3 cost=$0.0001/1.0
+INFO:     127.0.0.1:58216 - "POST /ask HTTP/1.1" 200 OK
+INFO:cost_guard:Usage: user=student req=4 cost=$0.0001/1.0
+INFO:     127.0.0.1:58226 - "POST /ask HTTP/1.1" 200 OK
+INFO:cost_guard:Usage: user=student req=5 cost=$0.0001/1.0
+INFO:     127.0.0.1:58236 - "POST /ask HTTP/1.1" 200 OK
+INFO:cost_guard:Usage: user=student req=6 cost=$0.0001/1.0
+INFO:     127.0.0.1:58250 - "POST /ask HTTP/1.1" 200 OK
+INFO:cost_guard:Usage: user=student req=7 cost=$0.0001/1.0
+INFO:     127.0.0.1:58254 - "POST /ask HTTP/1.1" 200 OK
+INFO:cost_guard:Usage: user=student req=8 cost=$0.0002/1.0
+INFO:     127.0.0.1:58258 - "POST /ask HTTP/1.1" 200 OK
+INFO:cost_guard:Usage: user=student req=9 cost=$0.0002/1.0
+INFO:     127.0.0.1:58260 - "POST /ask HTTP/1.1" 200 OK
+INFO:cost_guard:Usage: user=student req=10 cost=$0.0002/1.0
+INFO:     127.0.0.1:58264 - "POST /ask HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58266 - "POST /ask HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:58274 - "POST /ask HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:58276 - "POST /ask HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:58284 - "POST /ask HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:58292 - "POST /ask HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:58298 - "POST /ask HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:58306 - "POST /ask HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:58310 - "POST /ask HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:58314 - "POST /ask HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:58328 - "POST /ask HTTP/1.1" 429 Too Many Requests
+INFO:     127.0.0.1:58330 - "GET /me/usage HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58342 - "POST /auth/token HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58354 - "GET /admin/stats HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:app:Shutdown
+INFO:     Application shutdown complete.
+INFO:     Finished server process [948]
+INFO:     Stopping reloader process [944]

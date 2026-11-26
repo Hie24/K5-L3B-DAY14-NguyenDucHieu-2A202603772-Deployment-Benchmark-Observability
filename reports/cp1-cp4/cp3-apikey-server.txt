@@ -1,0 +1,17 @@
+API Key: <REDACTED>
+Test: curl -H 'X-API-Key: <REDACTED>' http://localhost:8000/ask?question=hello
+INFO:     Will watch for changes in these directories: ['/mnt/c/Users/nguye/Downloads/AITC_K5/DAY14/LAB14/K5-L3B-DAY14-NguyenDucHieu-2A202603772-Deployment-Benchmark-Observability/04-api-gateway/develop']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [935] using WatchFiles
+INFO:     Started server process [938]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:46150 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46156 - "POST /ask HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:46158 - "POST /ask HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:46174 - "POST /ask HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [938]
+INFO:     Stopping reloader process [935]

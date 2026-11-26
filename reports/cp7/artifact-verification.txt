@@ -1,0 +1,3 @@
+PASS: 11 report pairs match; 7 x 300 requests; report tables match JSON;
+final eval 23/23, 0 regressions, exit 0; negative gate 20 regressions, exit 1;
+dataset/grader/source hashes intact; manifests confirm child cleanup.

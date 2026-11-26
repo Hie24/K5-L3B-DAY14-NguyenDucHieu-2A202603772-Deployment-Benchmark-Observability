@@ -1,0 +1,30 @@
+INFO:     Uvicorn running on http://127.0.0.1:42659 (Press CTRL+C to quit)
+INFO:     Started parent process [4413]
+INFO:     Started server process [4417]
+INFO:     Waiting for application startup.
+INFO:     Started server process [4416]
+INFO:     Waiting for application startup.
+{"ts": "2026-11-26T08:49:24.919701+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+{"ts": "2026-11-26T08:49:24.919779+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+{"ts": "2026-11-26T08:49:25.187132+00:00", "level": "INFO", "event": "http_request", "request_id": "a507127400e74ec0b8d2ed716e3cdaad", "method": "GET", "path": "/health", "status": 200, "ms": 1.337}
+{"ts": "2026-11-26T08:49:25.196581+00:00", "level": "INFO", "event": "http_request", "request_id": "d223b082ed64475bbdf75e27e585178b", "method": "POST", "path": "/ask", "status": 429, "ms": 7.241}
+{"ts": "2026-11-26T08:49:25.341255+00:00", "level": "INFO", "event": "llm_call", "provider": "mock", "input_tokens": 2, "output_tokens": 21, "cost_usd": 1.29e-05}
+{"ts": "2026-11-26T08:49:25.341752+00:00", "level": "INFO", "event": "http_request", "request_id": "e2d8a041359a4629be96b5a87c5c4ac5", "method": "POST", "path": "/ask", "status": 200, "ms": 142.422}
+INFO:     Received SIGTERM, exiting.
+INFO:     Terminated child process [4416]
+INFO:     Terminated child process [4417]
+INFO:     Waiting for child process [4416]
+INFO:     Shutting down
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T08:49:25.923238+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4417]
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T08:49:25.989367+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4416]
+INFO:     Waiting for child process [4417]
+INFO:     Stopping parent process [4413]

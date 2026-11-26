@@ -1,0 +1,11 @@
+test_atomic_daily_budget_and_monthly_limit (__main__.ProductionTests.test_atomic_daily_budget_and_monthly_limit) ... ok
+test_atomic_rate_limit_restart_and_expired_window (__main__.ProductionTests.test_atomic_rate_limit_restart_and_expired_window) ... ok
+test_auth_validation_and_json_logs (__main__.ProductionTests.test_auth_validation_and_json_logs) ... ok
+test_budget_refund_and_period_boundary (__main__.ProductionTests.test_budget_refund_and_period_boundary) ... ok
+test_groq_pipeline_accounting_with_stub_http (__main__.ProductionTests.test_groq_pipeline_accounting_with_stub_http) ... ok
+test_redis_unavailable_fails_closed (__main__.ProductionTests.test_redis_unavailable_fails_closed) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 32.003s
+
+OK

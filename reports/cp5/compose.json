@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "port": 50389,
+  "health": 200,
+  "ready": 200,
+  "missing_key": 401,
+  "valid_key": 200,
+  "uid": 10001,
+  "pid1_uvicorn": true,
+  "image_bytes": 286308133,
+  "image_mib": 273.045
+}

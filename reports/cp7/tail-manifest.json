@@ -1,0 +1,138 @@
+{
+  "phase": "tail",
+  "started_at_utc": "2026-11-26T09:26:30.082984+00:00",
+  "python": "3.12.3",
+  "os": "Linux",
+  "kernel": "6.18.58.1-microsoft-standard-WSL2",
+  "logical_cpus": 12,
+  "packages": {
+    "fastapi": "0.115.0",
+    "uvicorn": "0.30.0",
+    "pydantic": "2.9.0",
+    "httpx": "0.27.2",
+    "prometheus-client": "0.26.0"
+  },
+  "sha256": {
+    "06-lab-complete/benchmark-observability/develop/app.py": "07b9f96fea242f648e0b535f0bc166e8598f81b205d879bf4ca6046c194be134",
+    "06-lab-complete/benchmark-observability/develop/load_test.py": "b295fb84fe152db2a9e9021b1a594225bca2955dc2d8d324b4c22e926bb38686",
+    "06-lab-complete/benchmark-observability/develop/eval/run_eval.py": "a22eb3e7b8b9dbbd1e6eefe1aefe549f3a54edfee9a0217b0bb4c037efcf154e",
+    "06-lab-complete/benchmark-observability/develop/eval/golden_dataset.jsonl": "22e672344ef72779959f3cf480391cef247b2f8ce86415010ddea9b315e959ec",
+    "06-lab-complete/benchmark-observability/develop/utils/mock_llm.py": "e006f6588fb077b3492f6ef0aec0daaa8692e198ad6ed16e8ff290d72a499996"
+  },
+  "commands": [
+    {
+      "kind": "server",
+      "label": "v2-slow-0",
+      "started_at_utc": "2026-11-26T09:26:34.476105+00:00",
+      "version": "v2",
+      "port": 8002,
+      "mock_slow_rate": "0",
+      "pid": 5821,
+      "mock_env": {
+        "MOCK_LATENCY_MS": "120",
+        "MOCK_JITTER_MS": "60",
+        "MOCK_SLOW_MS": "1500",
+        "MOCK_ERROR_RATE": "0.01",
+        "MOCK_RETRIEVAL_MS": "20",
+        "MOCK_SLOW_RATE": "0"
+      }
+    },
+    {
+      "kind": "measurement",
+      "name": "load_v2_slow_0",
+      "started_at_utc": "2026-11-26T09:26:34.478153+00:00",
+      "finished_at_utc": "2026-11-26T09:26:38.912135+00:00",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "load_test.py",
+        "--url",
+        "http://localhost:8002",
+        "--requests",
+        "300",
+        "--concurrency",
+        "20",
+        "--out",
+        "reports/load_v2_slow_0.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "kind": "server",
+      "label": "v2-slow-0.03",
+      "started_at_utc": "2026-11-26T09:26:42.786833+00:00",
+      "version": "v2",
+      "port": 8002,
+      "mock_slow_rate": "0.03",
+      "pid": 5832,
+      "mock_env": {
+        "MOCK_LATENCY_MS": "120",
+        "MOCK_JITTER_MS": "60",
+        "MOCK_SLOW_MS": "1500",
+        "MOCK_ERROR_RATE": "0.01",
+        "MOCK_RETRIEVAL_MS": "20",
+        "MOCK_SLOW_RATE": "0.03"
+      }
+    },
+    {
+      "kind": "measurement",
+      "name": "load_v2_slow_0.03",
+      "started_at_utc": "2026-11-26T09:26:42.789208+00:00",
+      "finished_at_utc": "2026-11-26T09:26:48.927170+00:00",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "load_test.py",
+        "--url",
+        "http://localhost:8002",
+        "--requests",
+        "300",
+        "--concurrency",
+        "20",
+        "--out",
+        "reports/load_v2_slow_0.03.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "kind": "server",
+      "label": "v2-slow-0.1",
+      "started_at_utc": "2026-11-26T09:26:52.782323+00:00",
+      "version": "v2",
+      "port": 8002,
+      "mock_slow_rate": "0.1",
+      "pid": 5843,
+      "mock_env": {
+        "MOCK_LATENCY_MS": "120",
+        "MOCK_JITTER_MS": "60",
+        "MOCK_SLOW_MS": "1500",
+        "MOCK_ERROR_RATE": "0.01",
+        "MOCK_RETRIEVAL_MS": "20",
+        "MOCK_SLOW_RATE": "0.1"
+      }
+    },
+    {
+      "kind": "measurement",
+      "name": "load_v2_slow_0.1",
+      "started_at_utc": "2026-11-26T09:26:52.783126+00:00",
+      "finished_at_utc": "2026-11-26T09:27:00.224881+00:00",
+      "command": [
+        ".venv/bin/python",
+        "-B",
+        "load_test.py",
+        "--url",
+        "http://localhost:8002",
+        "--requests",
+        "300",
+        "--concurrency",
+        "20",
+        "--out",
+        "reports/load_v2_slow_0.1.json"
+      ],
+      "exit_code": 1
+    }
+  ],
+  "completed": true,
+  "finished_at_utc": "2026-11-26T09:27:00.456362+00:00",
+  "all_child_processes_stopped": true
+}

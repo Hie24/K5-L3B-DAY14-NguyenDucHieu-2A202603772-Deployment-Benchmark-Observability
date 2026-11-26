@@ -1,0 +1,38 @@
+{
+  "checked_at_utc": "2026-11-26T10:33:05.3572747Z",
+  "project_id": "3685af52-7142-41e8-9212-edbe1dcd4609",
+  "project_name": "k5-day14-agent",
+  "services": [
+    {
+      "service": "agent",
+      "deployment_id": "36643a81-fb3d-4eed-b459-af57b38503f7",
+      "deployment_status": "SUCCESS"
+    },
+    {
+      "service": "Redis",
+      "deployment_id": "ba6196df-4c2d-4cb0-ab76-b79a53fd0a1f",
+      "deployment_status": "SUCCESS"
+    }
+  ],
+  "variable_names": [
+    "AGENT_API_KEY",
+    "DAILY_BUDGET_USD",
+    "ENVIRONMENT",
+    "GROQ_API_KEY",
+    "GROQ_CONTEXT_WINDOW_TOKENS",
+    "GROQ_MAX_COMPLETION_TOKENS",
+    "GROQ_MODEL",
+    "GROQ_PRICE_INPUT_PER_1K_USD",
+    "GROQ_PRICE_OUTPUT_PER_1K_USD",
+    "GROQ_TIMEOUT_SECONDS",
+    "LLM_PROVIDER",
+    "LOG_LEVEL",
+    "MONTHLY_BUDGET_USD",
+    "PORT",
+    "RATE_LIMIT_PER_MINUTE",
+    "REDIS_KEY_PREFIX",
+    "REDIS_URL",
+    "WEB_CONCURRENCY",
+    "groq_lab14"
+  ]
+}

@@ -34,8 +34,19 @@ from utils.mock_llm import ask
 # ── Redis (optional — fallback to in-memory dict nếu không có Redis)
 try:
     import redis
+    from redis.backoff import NoBackoff
+    from redis.retry import Retry
+
     REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
-    _redis = redis.from_url(REDIS_URL, decode_responses=True)
+    # Probes must return when Redis is unavailable instead of waiting through
+    # the client's connection retries. The next HTTP probe can try again.
+    _redis = redis.from_url(
+        REDIS_URL,
+        decode_responses=True,
+        socket_connect_timeout=1,
+        socket_timeout=1,
+        retry=Retry(NoBackoff(), 0),
+    )
     _redis.ping()
     USE_REDIS = True
     print("✅ Connected to Redis")

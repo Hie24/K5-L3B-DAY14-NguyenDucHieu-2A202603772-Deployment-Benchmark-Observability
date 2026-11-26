@@ -1,0 +1,70 @@
+{
+  "checked_at_utc": "2026-11-26T10:33:04.267324+00:00",
+  "base_url": "https://agent-production-74381197.up.railway.app",
+  "checks": [
+    {
+      "name": "health",
+      "method": "GET",
+      "path": "/health",
+      "status": 200,
+      "expected": 200,
+      "passed": true,
+      "latency_ms": 548.23,
+      "request_id": "365e41d7aadb4905aa8ff58db85d6212",
+      "body": {
+        "status": "ok"
+      }
+    },
+    {
+      "name": "ready",
+      "method": "GET",
+      "path": "/ready",
+      "status": 200,
+      "expected": 200,
+      "passed": true,
+      "latency_ms": 656.75,
+      "request_id": "e43142818088420cbc2c18adc65c9662",
+      "body": {
+        "ready": true
+      }
+    },
+    {
+      "name": "ask_without_key",
+      "method": "POST",
+      "path": "/ask",
+      "status": 401,
+      "expected": 401,
+      "passed": true,
+      "latency_ms": 410.77,
+      "request_id": "f1f1975c93094c37a83efe226f609aa5",
+      "body": {
+        "detail": "Invalid or missing X-API-Key"
+      }
+    },
+    {
+      "name": "ask_with_key",
+      "method": "POST",
+      "path": "/ask",
+      "status": 200,
+      "expected": 200,
+      "passed": true,
+      "latency_ms": 802.11,
+      "request_id": "56a336436ea54abda01bf92fe1d1a40f",
+      "body": {
+        "question": "Reply with one short sentence: what is deployment?",
+        "answer": "Deployment is the process of moving software from development to a live environment for users.",
+        "provider": "groq",
+        "model": "openai/gpt-oss-20b",
+        "usage": {
+          "input_tokens": 108,
+          "output_tokens": 30,
+          "cost_usd": 1.71e-05,
+          "source": "groq_reported",
+          "cost_source": "configured_prices"
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "note": "Live HTTPS checks. Key headers are omitted. Cost uses configured prices, not a billing invoice."
+}

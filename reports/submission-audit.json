@@ -1,0 +1,171 @@
+{
+  "checked_at_utc": "2026-11-26T10:42:17.664186+00:00",
+  "passed": true,
+  "checks": [
+    {
+      "check": "submission documents",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "deployment URL and completed results",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Part 3 Railway/Render comparison and Cloud Run",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "screenshot dashboard.png",
+      "passed": true,
+      "detail": "1536x701"
+    },
+    {
+      "check": "screenshot running.png",
+      "passed": true,
+      "detail": "1107x703"
+    },
+    {
+      "check": "screenshot test.png",
+      "passed": true,
+      "detail": "1400x1000"
+    },
+    {
+      "check": "screenshot grafana-dashboard.png",
+      "passed": true,
+      "detail": "1600x1200"
+    },
+    {
+      "check": "screenshot jaeger-slow-trace.png",
+      "passed": true,
+      "detail": "1600x1000"
+    },
+    {
+      "check": "screenshot jaeger-error-trace.png",
+      "passed": true,
+      "detail": "1600x1000"
+    },
+    {
+      "check": "screenshot prometheus-alert-firing.png",
+      "passed": true,
+      "detail": "1600x1000"
+    },
+    {
+      "check": "live public API results",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "live Groq usage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "cp5 full production checker evidence",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "cp6 full production checker evidence",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "CP7 JSON, tables, protected source hashes and gates",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Locust scale 1 copied output",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Locust scale 1 table matches CSV",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Locust scale 3 copied output",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Locust scale 3 table matches CSV",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "local links MISSION_ANSWERS.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "local links DEPLOYMENT.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "local links BENCHMARK_REPORT.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "local links 06-lab-complete/README.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "local links reports/cp6/README.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "local links reports/cp7/README.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "configured credentials supplied for in-memory secret scan",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "candidate files contain no real configured secrets/provider tokens",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "no real .env in candidate files",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "history contains no configured secrets/provider token patterns",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "history contains no real .env",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "submission prose/reports contain no email addresses",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "submission prose/reports contain no Vietnamese phone patterns",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "notes": [
+    "Presence/consistency audit plus configured-secret scan; screenshots were also visually reviewed.",
+    "Historical checker/CP7 runs are linked, not replaced by a static check.",
+    "LMS submission is performed by the student; technical self-review is not asserted on their behalf."
+  ]
+}

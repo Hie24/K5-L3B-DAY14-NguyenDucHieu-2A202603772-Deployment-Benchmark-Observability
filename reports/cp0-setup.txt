@@ -1,0 +1,92 @@
+CP0 setup verification
+Date: 2026-11-26 (Asia/Saigon)
+Result: PASS
+
+Observed results from commands run during CP0. These are setup checks,
+not production-readiness results or Part 7 benchmark measurements.
+
+Repository verification via connected GitHub API:
+owner: Hie24 (matches authenticated GitHub account)
+visibility: public
+fork: true
+parent: VinUni-AI20k/K5-L3-Day14-Deployment-Agent-Benchmark-Observability
+default branch: main
+local baseline commit: 83e677f
+repository name matches SUBMISSION.md format
+
+Windows tools:
+$ git --version
+git version 2.56.0.windows.1
+$ py -3.13 --version
+Python 3.13.7
+$ py -3.14 --version
+Python 3.14.2
+
+WSL setup:
+$ wsl --install --distribution Ubuntu-24.04 --no-launch --web-download
+Distribution successfully installed. It can be launched via 'wsl.exe -d Ubuntu-24.04'
+$ wsl --set-default Ubuntu-24.04
+The operation completed successfully.
+$ wsl --list --verbose
+  NAME              STATE           VERSION
+* Ubuntu-24.04      Running         2
+  docker-desktop    Running         2
+
+Ubuntu:
+$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+VERSION_ID="24.04"
+VERSION_CODENAME=noble
+$ python3 --version
+Python 3.12.3
+$ python3 -c 'import os,sys; print(os.name); print(sys.executable)'
+posix
+/usr/bin/python3
+$ git --version
+git version 2.43.0
+$ curl --version
+curl 8.5.0 (x86_64-pc-linux-gnu)
+
+Virtual environment:
+Installed python3-venv using apt-get after the initial ensurepip check failed.
+$ python3 -m venv .venv
+exit code: 0
+$ .venv/bin/python --version
+Python 3.12.3
+$ .venv/bin/python -m pip --version
+pip 24.0 from .venv/lib/python3.12/site-packages/pip (python 3.12)
+The pip path above is abbreviated relative to the repository root.
+
+Docker Desktop setup:
+Started existing Docker Desktop installation.
+Enabled "Enable integration with my default WSL distro" in Docker Desktop.
+Applied settings; observed "No unsaved changes" and "Engine running".
+
+Final verification executed inside Ubuntu-24.04:
+$ docker version
+Client:
+ Version: 29.9.3
+ API version: 1.56
+ OS/Arch: linux/amd64
+ Context: default
+Server: Docker Desktop 4.99.0 (245822)
+ Engine:
+  Version: 29.9.3
+  API version: 1.56 (minimum version 1.40)
+  OS/Arch: linux/amd64
+$ docker compose version
+Docker Compose version v5.7.0
+$ docker run --rm hello-world
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+exit code: 0
+
+Submission preparation:
+- MISSION_ANSWERS.md: exercise outline, CP0 results, AI log.
+- DEPLOYMENT.md: Railway plan and CP6 verification commands; not yet deployed.
+- BENCHMARK_REPORT.md: copied from supplied template; measurements not yet run.
+- reports/: setup verification; Part 7 JSON files will be generated at CP7.
+- benchmark-results/: placeholder for Locust CSV evidence at CP8.
+- screenshots/: placeholder for seven required screenshots at CP6 and CP8.
+- Part 6 grader and golden dataset remain unchanged.
+- No Groq API request was made during CP0.

@@ -1,0 +1,46 @@
+{
+  "tests_run": 5,
+  "successful": false,
+  "details": {
+    "budget": {
+      "concurrent_requests": 24,
+      "success": 6,
+      "blocked": 18,
+      "daily_and_monthly_nano_usd": [
+        81000,
+        81000
+      ],
+      "limit_nano_usd": 100000,
+      "monthly_zero_status": 402
+    },
+    "validation": {
+      "auth": [
+        401,
+        401,
+        401
+      ],
+      "invalid_input": [
+        422,
+        422,
+        422,
+        422,
+        422,
+        422,
+        422
+      ],
+      "valid": 200,
+      "json_log_records": 18,
+      "no_key_or_question_in_logs": true
+    },
+    "refund_and_rollover": {
+      "refunded_daily": true,
+      "refunded_monthly": true,
+      "utc_day_month_year_boundary": true
+    },
+    "redis_down": {
+      "health": 200,
+      "ready": 503,
+      "ask": 503
+    }
+  }
+}

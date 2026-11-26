@@ -1,0 +1,97 @@
+Stage cp1; actual commands and outputs; secrets redacted.
+
+$ cd 01-localhost-vs-production/develop; python app.py  # cp1-develop
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' -X POST -H 'Content-Type: application/json' --data '{}' 'http://127.0.0.1:8000/ask?question=Hello'
+HTTP/1.1 200 OK
+date: Thu, 26 Nov 2026 08:14:07 GMT
+server: uvicorn
+content-length: 95
+content-type: application/json
+
+{"answer":"Agent đang hoạt động tốt! (mock response) Hỏi thêm câu hỏi đi nhé."}
+CP_STATUS:200
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' -X POST -H 'Content-Type: application/json' --data '{"question": "Hello"}' http://127.0.0.1:8000/ask
+HTTP/1.1 422 Unprocessable Entity
+date: Thu, 26 Nov 2026 08:14:07 GMT
+server: uvicorn
+content-length: 94
+content-type: application/json
+
+{"detail":[{"type":"missing","loc":["query","question"],"msg":"Field required","input":null}]}
+CP_STATUS:422
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' http://127.0.0.1:8000/health
+HTTP/1.1 404 Not Found
+date: Thu, 26 Nov 2026 08:14:07 GMT
+server: uvicorn
+content-length: 22
+content-type: application/json
+
+{"detail":"Not Found"}
+CP_STATUS:404
+[exit code 0]
+
+Server cp1-develop: exit code 0
+$ cd 01-localhost-vs-production/production; python app.py  # cp1-production
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' http://127.0.0.1:8000/health
+HTTP/1.1 200 OK
+date: Thu, 26 Nov 2026 08:14:11 GMT
+server: uvicorn
+content-length: 125
+content-type: application/json
+
+{"status":"ok","uptime_seconds":0.9,"version":"1.0.0","environment":"staging","timestamp":"2026-11-26T08:14:11.741922+00:00"}
+CP_STATUS:200
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' http://127.0.0.1:8000/ready
+HTTP/1.1 200 OK
+date: Thu, 26 Nov 2026 08:14:11 GMT
+server: uvicorn
+content-length: 14
+content-type: application/json
+
+{"ready":true}
+CP_STATUS:200
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' -X POST -H 'Content-Type: application/json' --data '{"question": "What is deployment?"}' http://127.0.0.1:8000/ask
+HTTP/1.1 200 OK
+date: Thu, 26 Nov 2026 08:14:11 GMT
+server: uvicorn
+content-length: 170
+content-type: application/json
+
+{"question":"What is deployment?","answer":"Deployment là quá trình đưa code từ máy bạn lên server để người khác dùng được.","model":"gpt-4o-mini"}
+CP_STATUS:200
+[exit code 0]
+
+$ curl --silent --show-error --max-time 20 -i -w '
+CP_STATUS:%{http_code}
+' -X POST -H 'Content-Type: application/json' --data '{}' http://127.0.0.1:8000/ask
+HTTP/1.1 422 Unprocessable Entity
+date: Thu, 26 Nov 2026 08:14:11 GMT
+server: uvicorn
+content-length: 39
+content-type: application/json
+
+{"detail":"question field is required"}
+CP_STATUS:422
+[exit code 0]
+
+Server cp1-production: exit code 0

@@ -1,0 +1,13 @@
+.git/
+**/.venv/
+**/__pycache__/
+**/.env
+**/.env.*
+!**/.env.example
+reports/
+screenshots/
+benchmark-results/
+scripts/
+**/tests/
+06-lab-complete/benchmark-observability/
+06-lab-complete/check_production_ready.py

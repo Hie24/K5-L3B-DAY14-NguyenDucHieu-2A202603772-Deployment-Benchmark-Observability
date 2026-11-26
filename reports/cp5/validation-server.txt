@@ -1,0 +1,40 @@
+INFO:     Uvicorn running on http://127.0.0.1:58891 (Press CTRL+C to quit)
+INFO:     Started parent process [4421]
+INFO:     Started server process [4456]
+INFO:     Waiting for application startup.
+INFO:     Started server process [4455]
+INFO:     Waiting for application startup.
+{"ts": "2026-11-26T08:49:30.334442+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+{"ts": "2026-11-26T08:49:30.334461+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+{"ts": "2026-11-26T08:49:30.621208+00:00", "level": "INFO", "event": "http_request", "request_id": "03527aab52ce46faa40b9fabe571040c", "method": "GET", "path": "/health", "status": 200, "ms": 1.182}
+{"ts": "2026-11-26T08:49:30.627386+00:00", "level": "INFO", "event": "http_request", "request_id": "936e2906a8854ae29e41b64ead66d16a", "method": "GET", "path": "/ready", "status": 200, "ms": 4.353}
+{"ts": "2026-11-26T08:49:30.629978+00:00", "level": "INFO", "event": "http_request", "request_id": "36aa5ec78625409682d6f20e16558b80", "method": "POST", "path": "/ask", "status": 401, "ms": 1.378}
+{"ts": "2026-11-26T08:49:30.632077+00:00", "level": "INFO", "event": "http_request", "request_id": "f3a95f9e5451456f96ebca599c981a07", "method": "POST", "path": "/ask", "status": 401, "ms": 0.95}
+{"ts": "2026-11-26T08:49:30.633289+00:00", "level": "INFO", "event": "http_request", "request_id": "df4186201b1a4cf49b2ca849c7ec4dc8", "method": "POST", "path": "/ask", "status": 401, "ms": 0.588}
+{"ts": "2026-11-26T08:49:30.776334+00:00", "level": "INFO", "event": "http_request", "request_id": "9687bc3690e74bbba2d1a42007bef767", "method": "POST", "path": "/ask", "status": 422, "ms": 3.049}
+{"ts": "2026-11-26T08:49:30.779753+00:00", "level": "INFO", "event": "http_request", "request_id": "a6f68441985f45fdb760a98c8664d5b3", "method": "POST", "path": "/ask", "status": 422, "ms": 2.267}
+{"ts": "2026-11-26T08:49:30.781718+00:00", "level": "INFO", "event": "http_request", "request_id": "088a2eae9b6d4488b8cdc24a89cd86c1", "method": "POST", "path": "/ask", "status": 422, "ms": 0.883}
+{"ts": "2026-11-26T08:49:30.783035+00:00", "level": "INFO", "event": "http_request", "request_id": "ae23fdeec628478da402063ed421c0c9", "method": "POST", "path": "/ask", "status": 422, "ms": 0.683}
+{"ts": "2026-11-26T08:49:30.783962+00:00", "level": "INFO", "event": "http_request", "request_id": "b1a4072e60574ed1b57ac8c11c197b63", "method": "POST", "path": "/ask", "status": 422, "ms": 0.506}
+{"ts": "2026-11-26T08:49:30.786007+00:00", "level": "INFO", "event": "http_request", "request_id": "00f667f0c45649d9886a946c63a1052e", "method": "POST", "path": "/ask", "status": 422, "ms": 1.316}
+{"ts": "2026-11-26T08:49:30.787827+00:00", "level": "INFO", "event": "http_request", "request_id": "9dae9e855e554df992eef8542dfc8cc0", "method": "POST", "path": "/ask", "status": 422, "ms": 0.597}
+{"ts": "2026-11-26T08:49:30.912078+00:00", "level": "INFO", "event": "llm_call", "provider": "mock", "input_tokens": 6, "output_tokens": 23, "cost_usd": 1.47e-05}
+{"ts": "2026-11-26T08:49:30.912438+00:00", "level": "INFO", "event": "http_request", "request_id": "d7932c6229894086a2e7f89167bfd3c2", "method": "POST", "path": "/ask", "status": 200, "ms": 123.812}
+INFO:     Received SIGTERM, exiting.
+INFO:     Terminated child process [4455]
+INFO:     Terminated child process [4456]
+INFO:     Waiting for child process [4455]
+INFO:     Shutting down
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T08:49:31.075997+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4455]
+INFO:     Waiting for child process [4456]
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T08:49:31.122032+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4456]
+INFO:     Stopping parent process [4421]

@@ -1,0 +1,56 @@
+INFO:     Uvicorn running on http://127.0.0.1:40721 (Press CTRL+C to quit)
+INFO:     Started parent process [4378]
+INFO:     Started server process [4381]
+INFO:     Started server process [4382]
+INFO:     Waiting for application startup.
+INFO:     Waiting for application startup.
+{"ts": "2026-11-26T08:49:20.481476+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+{"ts": "2026-11-26T08:49:20.481472+00:00", "level": "INFO", "event": "startup", "environment": "staging", "provider": "mock"}
+INFO:     Application startup complete.
+INFO:     Application startup complete.
+{"ts": "2026-11-26T08:49:20.648819+00:00", "level": "INFO", "event": "http_request", "request_id": "1d60377c0ae94bfcb01b2ad3e1063d98", "method": "GET", "path": "/health", "status": 200, "ms": 1.288}
+{"ts": "2026-11-26T08:49:20.691639+00:00", "level": "INFO", "event": "http_request", "request_id": "e5e6845031554806a32980fde1e4eb82", "method": "POST", "path": "/ask", "status": 429, "ms": 34.978}
+{"ts": "2026-11-26T08:49:20.692598+00:00", "level": "INFO", "event": "http_request", "request_id": "ff656e8874cf43b9b232914738956ea6", "method": "POST", "path": "/ask", "status": 429, "ms": 37.525}
+{"ts": "2026-11-26T08:49:20.693306+00:00", "level": "INFO", "event": "http_request", "request_id": "d74de636a4d148e19af4b586f06df397", "method": "POST", "path": "/ask", "status": 429, "ms": 28.181}
+{"ts": "2026-11-26T08:49:20.695127+00:00", "level": "INFO", "event": "http_request", "request_id": "788984969aa74a59b9688ad2355a1e53", "method": "POST", "path": "/ask", "status": 429, "ms": 37.682}
+{"ts": "2026-11-26T08:49:20.695657+00:00", "level": "INFO", "event": "http_request", "request_id": "7ea3e5aeb76f4b69833483b098ec6eae", "method": "POST", "path": "/ask", "status": 429, "ms": 36.63}
+{"ts": "2026-11-26T08:49:20.696722+00:00", "level": "INFO", "event": "http_request", "request_id": "86d8beeda0ec44279a1d67ec11055186", "method": "POST", "path": "/ask", "status": 429, "ms": 32.875}
+{"ts": "2026-11-26T08:49:20.707887+00:00", "level": "INFO", "event": "http_request", "request_id": "ac72a816b626412a83a6deba58f3f606", "method": "POST", "path": "/ask", "status": 429, "ms": 9.301}
+{"ts": "2026-11-26T08:49:20.708291+00:00", "level": "INFO", "event": "http_request", "request_id": "62b04c0be9dc417fa672bf3b3c1fcf77", "method": "POST", "path": "/ask", "status": 429, "ms": 10.228}
+{"ts": "2026-11-26T08:49:20.708780+00:00", "level": "INFO", "event": "http_request", "request_id": "cbe222d094434c719d01e234db0c71d5", "method": "POST", "path": "/ask", "status": 429, "ms": 11.585}
+{"ts": "2026-11-26T08:49:20.709485+00:00", "level": "INFO", "event": "http_request", "request_id": "abb537a73696415db77bbf0930101e43", "method": "POST", "path": "/ask", "status": 429, "ms": 8.05}
+{"ts": "2026-11-26T08:49:20.710689+00:00", "level": "INFO", "event": "http_request", "request_id": "d3ad73e558514e8990ae7da08f52a660", "method": "POST", "path": "/ask", "status": 429, "ms": 11.968}
+{"ts": "2026-11-26T08:49:20.711025+00:00", "level": "INFO", "event": "http_request", "request_id": "bf2a5c10a36f4bc4aa591cd9e3193faf", "method": "POST", "path": "/ask", "status": 429, "ms": 10.424}
+{"ts": "2026-11-26T08:49:20.737514+00:00", "level": "INFO", "event": "http_request", "request_id": "875d142e7ded4bb0a4efec243def5bb5", "method": "POST", "path": "/ask", "status": 429, "ms": 26.095}
+{"ts": "2026-11-26T08:49:20.737998+00:00", "level": "INFO", "event": "http_request", "request_id": "85b9282d1fb844fba8305413b0b8a0ff", "method": "POST", "path": "/ask", "status": 429, "ms": 20.857}
+{"ts": "2026-11-26T08:49:20.738639+00:00", "level": "INFO", "event": "http_request", "request_id": "7e0b1ea2dd1e40db9650385b64104d50", "method": "POST", "path": "/ask", "status": 429, "ms": 22.678}
+{"ts": "2026-11-26T08:49:20.738980+00:00", "level": "INFO", "event": "http_request", "request_id": "c9492fed5feb415eabfef0aebaf94868", "method": "POST", "path": "/ask", "status": 429, "ms": 21.054}
+{"ts": "2026-11-26T08:49:20.739664+00:00", "level": "INFO", "event": "http_request", "request_id": "7bf4074700ac40f8be78529ca9e07885", "method": "POST", "path": "/ask", "status": 429, "ms": 19.32}
+{"ts": "2026-11-26T08:49:20.739910+00:00", "level": "INFO", "event": "http_request", "request_id": "93387bd8fb54414bbf29e5444929a2f7", "method": "POST", "path": "/ask", "status": 429, "ms": 20.925}
+{"ts": "2026-11-26T08:49:20.793305+00:00", "level": "INFO", "event": "llm_call", "provider": "mock", "input_tokens": 2, "output_tokens": 23, "cost_usd": 1.41e-05}
+{"ts": "2026-11-26T08:49:20.793881+00:00", "level": "INFO", "event": "http_request", "request_id": "06697e127b4f44ceb3aafb0ae691aaa3", "method": "POST", "path": "/ask", "status": 200, "ms": 131.523}
+{"ts": "2026-11-26T08:49:20.810469+00:00", "level": "INFO", "event": "llm_call", "provider": "mock", "input_tokens": 2, "output_tokens": 21, "cost_usd": 1.29e-05}
+{"ts": "2026-11-26T08:49:20.811053+00:00", "level": "INFO", "event": "http_request", "request_id": "7116103fa5e9448d9bf1e6defe7cf1dc", "method": "POST", "path": "/ask", "status": 200, "ms": 155.294}
+{"ts": "2026-11-26T08:49:20.818989+00:00", "level": "INFO", "event": "llm_call", "provider": "mock", "input_tokens": 2, "output_tokens": 29, "cost_usd": 1.77e-05}
+{"ts": "2026-11-26T08:49:20.819333+00:00", "level": "INFO", "event": "http_request", "request_id": "93e5da87692849a58060201a4152f80d", "method": "POST", "path": "/ask", "status": 200, "ms": 162.849}
+{"ts": "2026-11-26T08:49:20.823271+00:00", "level": "INFO", "event": "llm_call", "provider": "mock", "input_tokens": 2, "output_tokens": 23, "cost_usd": 1.41e-05}
+{"ts": "2026-11-26T08:49:20.823823+00:00", "level": "INFO", "event": "http_request", "request_id": "89c93480316846c384b192aa12c3d957", "method": "POST", "path": "/ask", "status": 200, "ms": 162.274}
+{"ts": "2026-11-26T08:49:20.828567+00:00", "level": "INFO", "event": "llm_call", "provider": "mock", "input_tokens": 2, "output_tokens": 23, "cost_usd": 1.41e-05}
+{"ts": "2026-11-26T08:49:20.829073+00:00", "level": "INFO", "event": "http_request", "request_id": "a1ae694d7ada448cb2e9cfd6b5dd0cba", "method": "POST", "path": "/ask", "status": 200, "ms": 171.825}
+{"ts": "2026-11-26T08:49:20.846059+00:00", "level": "INFO", "event": "http_request", "request_id": "8aa301f274c2479d93c36a24a1ea1539", "method": "POST", "path": "/ask", "status": 429, "ms": 7.818}
+INFO:     Received SIGTERM, exiting.
+INFO:     Terminated child process [4381]
+INFO:     Terminated child process [4382]
+INFO:     Waiting for child process [4381]
+INFO:     Shutting down
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T08:49:21.048280+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4382]
+INFO:     Waiting for application shutdown.
+{"ts": "2026-11-26T08:49:21.140848+00:00", "level": "INFO", "event": "shutdown"}
+INFO:     Application shutdown complete.
+INFO:     Finished server process [4381]
+INFO:     Waiting for child process [4382]
+INFO:     Stopping parent process [4378]
